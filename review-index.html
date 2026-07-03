@@ -1,0 +1,771 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>HERO Design Review</title>
+<link rel="stylesheet" as="style" crossorigin
+      href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css" />
+<style>
+/* ==========================================================
+   HERO Design Review Hub
+   Base    : #F3F4F6
+   Primary : #333333
+   Font    : Pretendard Variable
+   ========================================================== */
+:root{
+  --base:        #F3F4F6;
+  --surface:     #FFFFFF;
+  --primary:     #333333;
+  --text-strong: #1F2228;
+  --text:        #333333;
+  --text-sub:    #6B7280;
+  --text-faint:  #9CA3AF;
+  --line:        #E5E7EB;
+  --line-strong: #D1D5DB;
+
+  /* Point colors — 상태/구분 용도로만 제한적으로 사용 */
+  --green:       #16A34A;
+  --green-bg:    #ECFDF3;
+  --blue:        #2563EB;
+  --blue-bg:     #EFF4FF;
+  --amber:       #B45309;
+  --amber-bg:    #FFF7E8;
+  --violet:      #7C3AED;
+  --violet-bg:   #F5F1FE;
+
+  --radius-lg:   16px;
+  --radius-md:   12px;
+  --radius-sm:   8px;
+
+  --shadow-card: 0 1px 2px rgba(17,24,39,.04), 0 1px 3px rgba(17,24,39,.06);
+  --shadow-hover:0 4px 12px rgba(17,24,39,.10);
+}
+
+*{ margin:0; padding:0; box-sizing:border-box; }
+
+html{ -webkit-text-size-adjust:100%; }
+
+body{
+  font-family:"Pretendard Variable", Pretendard, -apple-system, BlinkMacSystemFont,
+              "Segoe UI", Roboto, "Noto Sans KR", sans-serif;
+  background:var(--base);
+  color:var(--text);
+  font-size:15px;
+  line-height:1.55;
+  letter-spacing:-0.01em;
+  -webkit-font-smoothing:antialiased;
+}
+
+a{ color:inherit; text-decoration:none; }
+
+.wrap{
+  max-width:1080px;
+  margin:0 auto;
+  padding:48px 24px 96px;
+}
+
+/* ==========================================================
+   Header — 프로젝트 정보
+   ========================================================== */
+.hub-header{
+  margin-bottom:40px;
+}
+.hub-eyebrow{
+  display:inline-flex;
+  align-items:center;
+  gap:8px;
+  font-size:12px;
+  font-weight:600;
+  letter-spacing:.08em;
+  text-transform:uppercase;
+  color:var(--text-faint);
+  margin-bottom:14px;
+}
+.hub-eyebrow::before{
+  content:"";
+  width:20px; height:1px;
+  background:var(--line-strong);
+}
+.hub-title{
+  font-size:32px;
+  font-weight:800;
+  letter-spacing:-0.03em;
+  color:var(--text-strong);
+  margin-bottom:10px;
+}
+.hub-desc{
+  font-size:15px;
+  color:var(--text-sub);
+  max-width:560px;
+  margin-bottom:24px;
+}
+.hub-meta{
+  display:flex;
+  flex-wrap:wrap;
+  gap:10px;
+}
+.meta-chip{
+  display:inline-flex;
+  align-items:center;
+  gap:8px;
+  background:var(--surface);
+  border:1px solid var(--line);
+  border-radius:999px;
+  padding:7px 14px;
+  font-size:13px;
+  font-weight:500;
+  color:var(--text);
+  box-shadow:var(--shadow-card);
+}
+.meta-chip .label{
+  font-size:12px;
+  font-weight:600;
+  color:var(--text-faint);
+  letter-spacing:.02em;
+}
+.dot{
+  width:7px; height:7px;
+  border-radius:50%;
+  background:var(--green);
+  flex:none;
+}
+.chip-progress{ color:var(--green); font-weight:600; }
+
+/* ==========================================================
+   Project Card
+   — 프로젝트 추가 시 <section class="project-card"> 블록을
+     복제하는 것만으로 확장 가능
+   ========================================================== */
+.project-card{
+  background:var(--surface);
+  border:1px solid var(--line);
+  border-radius:var(--radius-lg);
+  box-shadow:var(--shadow-card);
+  overflow:hidden;
+}
+.project-card + .project-card{ margin-top:28px; }
+
+.project-head{
+  display:flex;
+  align-items:flex-start;
+  justify-content:space-between;
+  gap:16px;
+  padding:26px 28px 22px;
+  border-bottom:1px solid var(--line);
+}
+.project-name{
+  font-size:19px;
+  font-weight:700;
+  letter-spacing:-0.02em;
+  color:var(--text-strong);
+}
+.project-sub{
+  margin-top:4px;
+  font-size:13px;
+  color:var(--text-sub);
+}
+.project-count{
+  flex:none;
+  font-size:12px;
+  font-weight:600;
+  color:var(--text-faint);
+  background:var(--base);
+  border:1px solid var(--line);
+  border-radius:999px;
+  padding:5px 12px;
+  white-space:nowrap;
+}
+
+.project-body{ padding:8px 28px 28px; }
+
+/* ==========================================================
+   Device Section
+   ========================================================== */
+.device-section{
+  padding:24px 0;
+}
+.device-section + .device-section{
+  border-top:1px solid var(--line);
+}
+.device-head{
+  display:flex;
+  align-items:center;
+  gap:12px;
+  margin-bottom:18px;
+}
+.device-icon{
+  width:36px; height:36px;
+  border-radius:var(--radius-sm);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  flex:none;
+  font-size:16px;
+}
+.device-icon.mobile   { background:var(--blue-bg); }
+.device-icon.foldable { background:var(--violet-bg); }
+.device-icon.tablet   { background:var(--amber-bg); }
+.device-icon.web      { background:var(--green-bg); }
+
+.device-title{
+  font-size:16px;
+  font-weight:700;
+  letter-spacing:-0.01em;
+  color:var(--text-strong);
+}
+.device-note{
+  font-size:12px;
+  color:var(--text-faint);
+  margin-top:1px;
+}
+
+/* Theme Group — Light / Dark / Large Text 행 단위 구성 */
+.theme-grid{
+  display:grid;
+  grid-template-columns:repeat(2, minmax(0,1fr));
+  gap:12px;
+}
+.theme-group{
+  border:1px solid var(--line);
+  border-radius:var(--radius-md);
+  padding:14px 16px;
+  background:var(--surface);
+}
+.theme-label{
+  display:flex;
+  align-items:center;
+  gap:6px;
+  font-size:13px;
+  font-weight:600;
+  color:var(--text);
+  margin-bottom:10px;
+}
+.theme-tag{
+  font-size:11px;
+  font-weight:600;
+  color:var(--text-faint);
+  background:var(--base);
+  border-radius:5px;
+  padding:2px 7px;
+}
+.btn-row{
+  display:flex;
+  flex-wrap:wrap;
+  gap:8px;
+}
+
+/* ==========================================================
+   Link Button — 시안 화면으로 이동
+   ========================================================== */
+.link-btn{
+  display:inline-flex;
+  align-items:center;
+  gap:7px;
+  padding:9px 16px;
+  border:1px solid var(--line-strong);
+  border-radius:var(--radius-sm);
+  background:var(--surface);
+  font-size:13.5px;
+  font-weight:600;
+  color:var(--text);
+  cursor:pointer;
+  transition:background-color .15s ease,
+             border-color .15s ease,
+             box-shadow .15s ease;
+}
+.link-btn:hover{
+  background:#FAFAFB;
+  border-color:var(--primary);
+  box-shadow:var(--shadow-hover);
+}
+.link-btn:focus-visible{
+  outline:2px solid var(--primary);
+  outline-offset:2px;
+}
+.link-btn .arrow{
+  font-size:12px;
+  color:var(--text-faint);
+  transition:color .15s ease;
+}
+.link-btn:hover .arrow{ color:var(--primary); }
+
+.link-btn.wide{ width:100%; justify-content:space-between; }
+
+/* OS 뱃지 */
+.os-badge{
+  font-size:10.5px;
+  font-weight:700;
+  letter-spacing:.03em;
+  color:var(--text-faint);
+  border:1px solid var(--line);
+  border-radius:4px;
+  padding:1px 5px;
+}
+
+/* ==========================================================
+   Tablet Accordion (Portrait / Landscape)
+   ========================================================== */
+.accordion{
+  border:1px solid var(--line);
+  border-radius:var(--radius-md);
+  overflow:hidden;
+  background:var(--surface);
+}
+.accordion + .accordion{ margin-top:12px; }
+
+.accordion-toggle{
+  width:100%;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:12px;
+  padding:15px 18px;
+  background:var(--surface);
+  border:none;
+  font-family:inherit;
+  font-size:14px;
+  font-weight:700;
+  letter-spacing:-0.01em;
+  color:var(--text-strong);
+  cursor:pointer;
+  transition:background-color .15s ease;
+}
+.accordion-toggle:hover{ background:#FAFAFB; }
+.accordion-toggle:focus-visible{
+  outline:2px solid var(--primary);
+  outline-offset:-2px;
+}
+.accordion-toggle .left{
+  display:flex;
+  align-items:center;
+  gap:10px;
+}
+.orientation-mark{
+  display:inline-block;
+  border:1.5px solid var(--text-faint);
+  border-radius:3px;
+  flex:none;
+}
+.orientation-mark.portrait { width:11px; height:15px; }
+.orientation-mark.landscape{ width:15px; height:11px; }
+
+.accordion-toggle .count{
+  font-size:11.5px;
+  font-weight:600;
+  color:var(--text-faint);
+}
+.chevron{
+  width:9px; height:9px;
+  border-right:1.5px solid var(--text-faint);
+  border-bottom:1.5px solid var(--text-faint);
+  transform:rotate(45deg);
+  transition:transform .2s ease;
+  flex:none;
+  margin-top:-3px;
+}
+.accordion.open .chevron{
+  transform:rotate(-135deg);
+  margin-top:3px;
+}
+
+.accordion-panel{
+  display:none;
+  padding:6px 18px 18px;
+  border-top:1px solid var(--line);
+}
+.accordion.open .accordion-panel{ display:block; }
+.accordion-panel .theme-grid{ margin-top:12px; }
+
+/* ==========================================================
+   Web Section — 역할별 Responsive 진입
+   ========================================================== */
+.web-grid{
+  display:grid;
+  grid-template-columns:repeat(3, minmax(0,1fr));
+  gap:12px;
+}
+.web-card{
+  display:flex;
+  flex-direction:column;
+  gap:12px;
+  border:1px solid var(--line);
+  border-radius:var(--radius-md);
+  padding:16px;
+  background:var(--surface);
+  transition:border-color .15s ease, box-shadow .15s ease, background-color .15s ease;
+}
+.web-card:hover{
+  background:#FAFAFB;
+  border-color:var(--primary);
+  box-shadow:var(--shadow-hover);
+}
+.web-role{
+  font-size:14px;
+  font-weight:700;
+  color:var(--text-strong);
+}
+.web-role-sub{
+  font-size:12px;
+  color:var(--text-sub);
+  margin-top:2px;
+}
+.responsive-tag{
+  align-self:flex-start;
+  display:inline-flex;
+  align-items:center;
+  gap:6px;
+  font-size:11.5px;
+  font-weight:600;
+  color:var(--green);
+  background:var(--green-bg);
+  border-radius:999px;
+  padding:3px 10px;
+}
+
+/* ==========================================================
+   Footer
+   ========================================================== */
+.hub-footer{
+  margin-top:48px;
+  padding-top:20px;
+  border-top:1px solid var(--line);
+  display:flex;
+  justify-content:space-between;
+  flex-wrap:wrap;
+  gap:8px;
+  font-size:12.5px;
+  color:var(--text-faint);
+}
+
+/* ==========================================================
+   Responsive
+   ========================================================== */
+@media (max-width: 860px){
+  .wrap{ padding:36px 20px 72px; }
+  .hub-title{ font-size:27px; }
+  .web-grid{ grid-template-columns:repeat(2, minmax(0,1fr)); }
+}
+
+@media (max-width: 640px){
+  .wrap{ padding:28px 16px 64px; }
+  .hub-title{ font-size:24px; }
+  .project-head{ padding:20px 20px 18px; flex-direction:column; gap:10px; }
+  .project-body{ padding:4px 20px 20px; }
+  .theme-grid{ grid-template-columns:1fr; }
+  .web-grid{ grid-template-columns:1fr; }
+  .link-btn{ flex:1 1 auto; justify-content:center; }
+}
+</style>
+</head>
+<body>
+
+<div class="wrap">
+
+  <!-- ======================================================
+       Header
+  ======================================================= -->
+  <header class="hub-header">
+    <span class="hub-eyebrow">Design Review Hub</span>
+    <h1 class="hub-title">HERO Design Review</h1>
+    <p class="hub-desc">
+      HERO 프로젝트의 디자인 시안을 디바이스·테마·플랫폼별로 한곳에서 확인하고,
+      원하는 화면으로 빠르게 이동할 수 있는 리뷰 허브입니다.
+    </p>
+    <div class="hub-meta">
+      <span class="meta-chip">
+        <span class="dot"></span>
+        <span class="label">Project&nbsp;Status</span>
+        <span class="chip-progress">In Progress</span>
+      </span>
+      <span class="meta-chip">
+        <span class="label">Last&nbsp;Update</span>
+        2026.07.03
+      </span>
+      <span class="meta-chip">
+        <span class="label">Devices</span>
+        Mobile · Foldable · Tablet · Web
+      </span>
+    </div>
+  </header>
+
+  <!-- ======================================================
+       Project Card : HERO B2B 주문 플랫폼 & 관리자 포털
+       ─ 신규 프로젝트(Order, Manufacturer, Admin, 전자계약,
+         인허가 등) 추가 시 이 <section> 블록을 복제해 사용
+  ======================================================= -->
+  <section class="project-card">
+
+    <div class="project-head">
+      <div>
+        <h2 class="project-name">HERO B2B 주문 플랫폼 &amp; 관리자 포털</h2>
+        <p class="project-sub">거래선(제조사·도매사) 주문 플랫폼 및 내부 관리자 포털 디자인 시안</p>
+      </div>
+      <span class="project-count">4 Devices · 31 Screens</span>
+    </div>
+
+    <div class="project-body">
+
+      <!-- ─────────── Mobile ─────────── -->
+      <div class="device-section">
+        <div class="device-head">
+          <span class="device-icon mobile">📱</span>
+          <div>
+            <div class="device-title">Mobile</div>
+            <div class="device-note">iOS · Android / Light · Dark · Large Text</div>
+          </div>
+        </div>
+
+        <div class="theme-grid">
+          <div class="theme-group">
+            <div class="theme-label">Light</div>
+            <div class="btn-row">
+              <a class="link-btn" href="#">iOS <span class="arrow">→</span></a>
+              <a class="link-btn" href="#">Android <span class="arrow">→</span></a>
+            </div>
+          </div>
+
+          <div class="theme-group">
+            <div class="theme-label">Dark</div>
+            <div class="btn-row">
+              <a class="link-btn" href="#">iOS <span class="arrow">→</span></a>
+              <a class="link-btn" href="#">Android <span class="arrow">→</span></a>
+            </div>
+          </div>
+
+          <div class="theme-group">
+            <div class="theme-label">Light <span class="theme-tag">Large Text</span></div>
+            <div class="btn-row">
+              <a class="link-btn" href="#">iOS <span class="arrow">→</span></a>
+              <a class="link-btn" href="#">Android <span class="arrow">→</span></a>
+            </div>
+          </div>
+
+          <div class="theme-group">
+            <div class="theme-label">Dark <span class="theme-tag">Large Text</span></div>
+            <div class="btn-row">
+              <a class="link-btn" href="#">iOS <span class="arrow">→</span></a>
+              <a class="link-btn" href="#">Android <span class="arrow">→</span></a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ─────────── Foldable ─────────── -->
+      <div class="device-section">
+        <div class="device-head">
+          <span class="device-icon foldable">📖</span>
+          <div>
+            <div class="device-title">Foldable</div>
+            <div class="device-note">Android / Light · Dark · Large Text</div>
+          </div>
+        </div>
+
+        <div class="theme-grid">
+          <div class="theme-group">
+            <div class="theme-label">Light</div>
+            <div class="btn-row">
+              <a class="link-btn" href="#">Android <span class="arrow">→</span></a>
+            </div>
+          </div>
+
+          <div class="theme-group">
+            <div class="theme-label">Dark</div>
+            <div class="btn-row">
+              <a class="link-btn" href="#">Android <span class="arrow">→</span></a>
+            </div>
+          </div>
+
+          <div class="theme-group">
+            <div class="theme-label">Light <span class="theme-tag">Large Text</span></div>
+            <div class="btn-row">
+              <a class="link-btn" href="#">Android <span class="arrow">→</span></a>
+            </div>
+          </div>
+
+          <div class="theme-group">
+            <div class="theme-label">Dark <span class="theme-tag">Large Text</span></div>
+            <div class="btn-row">
+              <a class="link-btn" href="#">Android <span class="arrow">→</span></a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ─────────── Tablet (Accordion) ─────────── -->
+      <div class="device-section">
+        <div class="device-head">
+          <span class="device-icon tablet">💻</span>
+          <div>
+            <div class="device-title">Tablet</div>
+            <div class="device-note">Portrait · Landscape / iOS · Android / Light · Dark · Large Text</div>
+          </div>
+        </div>
+
+        <!-- Portrait -->
+        <div class="accordion open" data-accordion>
+          <button class="accordion-toggle" type="button" aria-expanded="true">
+            <span class="left">
+              <span class="orientation-mark portrait"></span>
+              Portrait
+              <span class="count">8 Screens</span>
+            </span>
+            <span class="chevron"></span>
+          </button>
+          <div class="accordion-panel">
+            <div class="theme-grid">
+              <div class="theme-group">
+                <div class="theme-label">Light</div>
+                <div class="btn-row">
+                  <a class="link-btn" href="#">iOS <span class="arrow">→</span></a>
+                  <a class="link-btn" href="#">Android <span class="arrow">→</span></a>
+                </div>
+              </div>
+              <div class="theme-group">
+                <div class="theme-label">Dark</div>
+                <div class="btn-row">
+                  <a class="link-btn" href="#">iOS <span class="arrow">→</span></a>
+                  <a class="link-btn" href="#">Android <span class="arrow">→</span></a>
+                </div>
+              </div>
+              <div class="theme-group">
+                <div class="theme-label">Light <span class="theme-tag">Large Text</span></div>
+                <div class="btn-row">
+                  <a class="link-btn" href="#">iOS <span class="arrow">→</span></a>
+                  <a class="link-btn" href="#">Android <span class="arrow">→</span></a>
+                </div>
+              </div>
+              <div class="theme-group">
+                <div class="theme-label">Dark <span class="theme-tag">Large Text</span></div>
+                <div class="btn-row">
+                  <a class="link-btn" href="#">iOS <span class="arrow">→</span></a>
+                  <a class="link-btn" href="#">Android <span class="arrow">→</span></a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Landscape -->
+        <div class="accordion" data-accordion>
+          <button class="accordion-toggle" type="button" aria-expanded="false">
+            <span class="left">
+              <span class="orientation-mark landscape"></span>
+              Landscape
+              <span class="count">8 Screens</span>
+            </span>
+            <span class="chevron"></span>
+          </button>
+          <div class="accordion-panel">
+            <div class="theme-grid">
+              <div class="theme-group">
+                <div class="theme-label">Light</div>
+                <div class="btn-row">
+                  <a class="link-btn" href="#">iOS <span class="arrow">→</span></a>
+                  <a class="link-btn" href="#">Android <span class="arrow">→</span></a>
+                </div>
+              </div>
+              <div class="theme-group">
+                <div class="theme-label">Dark</div>
+                <div class="btn-row">
+                  <a class="link-btn" href="#">iOS <span class="arrow">→</span></a>
+                  <a class="link-btn" href="#">Android <span class="arrow">→</span></a>
+                </div>
+              </div>
+              <div class="theme-group">
+                <div class="theme-label">Light <span class="theme-tag">Large Text</span></div>
+                <div class="btn-row">
+                  <a class="link-btn" href="#">iOS <span class="arrow">→</span></a>
+                  <a class="link-btn" href="#">Android <span class="arrow">→</span></a>
+                </div>
+              </div>
+              <div class="theme-group">
+                <div class="theme-label">Dark <span class="theme-tag">Large Text</span></div>
+                <div class="btn-row">
+                  <a class="link-btn" href="#">iOS <span class="arrow">→</span></a>
+                  <a class="link-btn" href="#">Android <span class="arrow">→</span></a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ─────────── Web ─────────── -->
+      <div class="device-section">
+        <div class="device-head">
+          <span class="device-icon web">🖥️</span>
+          <div>
+            <div class="device-title">Web</div>
+            <div class="device-note">역할별 Responsive 화면</div>
+          </div>
+        </div>
+
+        <div class="web-grid">
+          <a class="web-card" href="#">
+            <div>
+              <div class="web-role">Manufacturer</div>
+              <div class="web-role-sub">제조사 포털</div>
+            </div>
+            <span class="responsive-tag">● Responsive</span>
+          </a>
+          <a class="web-card" href="#">
+            <div>
+              <div class="web-role">Wholesaler</div>
+              <div class="web-role-sub">도매사 포털</div>
+            </div>
+            <span class="responsive-tag">● Responsive</span>
+          </a>
+          <a class="web-card" href="#">
+            <div>
+              <div class="web-role">Admin</div>
+              <div class="web-role-sub">관리자 포털</div>
+            </div>
+            <span class="responsive-tag">● Responsive</span>
+          </a>
+        </div>
+      </div>
+
+    </div><!-- /.project-body -->
+  </section>
+
+  <!--
+    ▼ 확장 예시 — 신규 프로젝트 추가 시 아래 주석을 해제하고 내용만 교체
+
+  <section class="project-card">
+    <div class="project-head">
+      <div>
+        <h2 class="project-name">전자계약</h2>
+        <p class="project-sub">전자계약 서비스 디자인 시안</p>
+      </div>
+      <span class="project-count">Coming Soon</span>
+    </div>
+    <div class="project-body">
+      ... device-section 블록 구성 ...
+    </div>
+  </section>
+  -->
+
+  <footer class="hub-footer">
+    <span>HERO Design Review Hub</span>
+    <span>Internal Use Only · Updated 2026.07.03</span>
+  </footer>
+
+</div>
+
+<script>
+/* ==========================================================
+   Tablet Accordion
+   — data-accordion 블록 단위로 동작 (프로젝트 추가 시 자동 적용)
+   ========================================================== */
+document.querySelectorAll('[data-accordion]').forEach(function(acc){
+  var toggle = acc.querySelector('.accordion-toggle');
+  toggle.addEventListener('click', function(){
+    var isOpen = acc.classList.toggle('open');
+    toggle.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+  });
+});
+</script>
+
+</body>
+</html>
