@@ -1,0 +1,429 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Hero 주문 앱 UI/UX 개선 시안 제안서</title>
+<link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css">
+<style>
+  :root{
+    --type-title: 60px;
+    --type-subtitle: 42px;
+    --type-body: 32px;
+    --type-small: 26px;
+    --type-kicker: 25px;
+    --type-mega: 108px;
+    --pad-top: 96px;
+    --pad-bottom: 80px;
+    --pad-x: 100px;
+    --gap-title: 44px;
+    --gap-item: 22px;
+
+    --ink: #16202E;
+    --ink-2: #55637A;
+    --ink-3: #8894A8;
+    --line: #E3E7EE;
+    --bg: #FFFFFF;
+    --bg-soft: #F4F6F9;
+
+    --blue: #3D6EF5;
+    --blue-soft: #EAF0FE;
+    --green: #16B364;
+    --green-soft: #E6F7EE;
+    --pink: #F5399B;
+  }
+
+  *{ box-sizing:border-box; }
+  html,body{ margin:0; padding:0; background:#0C1016; }
+  deck-stage:not(:defined){ visibility:hidden; }
+  body{ font-family:"Pretendard","Pretendard Variable",-apple-system,system-ui,sans-serif; color:var(--ink); -webkit-font-smoothing:antialiased; }
+
+  section{
+    background:var(--bg);
+    color:var(--ink);
+    padding: var(--pad-top) var(--pad-x) var(--pad-bottom);
+    overflow:hidden;
+  }
+
+  h1,h2,h3,p{ margin:0; }
+
+  .kicker{
+    font-size:var(--type-kicker); font-weight:700; letter-spacing:.14em;
+    text-transform:uppercase; color:var(--acc, var(--ink-3));
+  }
+  .eyebrow-row{ display:flex; align-items:center; gap:16px; }
+  .eyebrow-dot{ width:12px; height:12px; border-radius:3px; background:var(--acc,var(--ink)); }
+
+  /* ---------- generic screen-slide header ---------- */
+  .head{ display:flex; align-items:flex-end; justify-content:space-between; gap:40px; padding-bottom:28px; border-bottom:1px solid var(--line); }
+  .head-left{ display:flex; flex-direction:column; gap:14px; }
+  .head .title{ font-size:var(--type-title); font-weight:800; letter-spacing:-.02em; line-height:1.02; }
+  .head .title .accent{ color:var(--acc); }
+  .badge{
+    display:inline-flex; align-items:center; gap:10px;
+    font-size:var(--type-small); font-weight:700; color:#fff;
+    background:var(--acc); padding:12px 22px; border-radius:100px;
+  }
+
+  /* ---------- device shots ---------- */
+  .shots{ display:flex; align-items:flex-end; justify-content:center; gap:38px; height:100%; }
+  .shot{ display:flex; flex-direction:column; align-items:center; gap:16px; }
+  .shot .frame{
+    border-radius:22px; overflow:hidden; background:#fff;
+    border:1px solid var(--line);
+    box-shadow: 0 30px 60px -24px rgba(22,32,46,.35), 0 4px 12px -6px rgba(22,32,46,.2);
+  }
+  .shot img{ display:block; height:100%; width:auto; }
+  .shot .cap{ font-size:20px; font-weight:700; color:var(--ink-3); letter-spacing:.02em; }
+
+  /* ---------- bullet lists ---------- */
+  ul.adv{ list-style:none; margin:0; padding:0; display:flex; flex-direction:column; gap:var(--gap-item); }
+  ul.adv li{ position:relative; padding-left:34px; font-size:var(--type-body); line-height:1.4; color:var(--ink); font-weight:600; }
+  ul.adv li::before{ content:""; position:absolute; left:0; top:.55em; width:14px; height:14px; border-radius:4px; background:var(--acc); }
+  ul.adv li span{ display:block; font-size:var(--type-small); font-weight:500; color:var(--ink-2); margin-top:6px; line-height:1.45; }
+
+  .block-label{ font-size:var(--type-small); font-weight:800; color:var(--acc); letter-spacing:.02em; margin-bottom:18px; }
+
+  .why{
+    margin-top:auto; background:var(--acc-soft); border-radius:18px; padding:26px 30px;
+  }
+  .why .why-t{ font-size:var(--type-small); font-weight:800; color:var(--acc); margin-bottom:8px; }
+  .why p{ font-size:var(--type-body); line-height:1.4; font-weight:600; color:var(--ink); }
+
+  @media (prefers-reduced-motion:no-preference){
+    [data-deck-active] .anim{ animation: rise .55s cubic-bezier(.2,.7,.2,1) both; }
+    [data-deck-active] .anim.d1{ animation-delay:.06s; }
+    [data-deck-active] .anim.d2{ animation-delay:.12s; }
+    [data-deck-active] .anim.d3{ animation-delay:.18s; }
+    @keyframes rise{ from{ opacity:0; transform:translateY(22px);} to{ opacity:1; transform:none;} }
+  }
+  a{ color:var(--blue); }
+  a:hover{ color:#2a54c8; }
+</style>
+</head>
+<body>
+<deck-stage width="1920" height="1080">
+
+  <!-- 1. COVER -->
+  <section data-label="표지">
+    <div style="height:100%; display:flex; flex-direction:column; justify-content:space-between;">
+      <div class="eyebrow-row anim">
+        <span style="font-size:34px; font-weight:900; letter-spacing:-.02em;">Hero</span>
+        <span style="width:1px; height:26px; background:var(--line);"></span>
+        <span style="font-size:24px; font-weight:700; color:var(--ink-2);">세계주류 B2B 주문 플랫폼</span>
+      </div>
+
+      <div>
+        <div class="anim" style="display:flex; gap:12px; margin-bottom:34px;">
+          <span style="width:64px; height:10px; border-radius:6px; background:var(--blue);"></span>
+          <span style="width:64px; height:10px; border-radius:6px; background:var(--green);"></span>
+        </div>
+        <h1 class="anim d1" style="font-size:var(--type-mega); font-weight:800; letter-spacing:-.03em; line-height:1.0;">주문 앱 UI/UX<br>개선 시안 제안서</h1>
+        <p class="anim d2" style="font-size:var(--type-subtitle); font-weight:600; color:var(--ink-2); margin-top:30px; letter-spacing:-.01em;">홈 · 장바구니 화면 리뉴얼 &nbsp;·&nbsp; 태블릿 &amp; 모바일 2개 시안</p>
+      </div>
+
+      <div class="anim d3" style="display:flex; justify-content:space-between; align-items:flex-end; font-size:var(--type-small); color:var(--ink-3); font-weight:600;">
+        <span>시안 A 블루 &nbsp;·&nbsp; 시안 B 그린</span>
+        <span>2025. 10 &nbsp;|&nbsp; Design Proposal v1</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- 2. OVERVIEW -->
+  <section data-label="프로젝트 개요">
+    <div style="height:100%; display:grid; grid-template-columns: 1.05fr 1fr; gap:90px;">
+      <div style="display:flex; flex-direction:column; justify-content:center;">
+        <span class="kicker anim">Overview</span>
+        <h2 class="anim d1" style="font-size:var(--type-title); font-weight:800; letter-spacing:-.02em; margin-top:20px; line-height:1.08;">가장 자주 쓰는 두 화면부터<br>다시 설계했습니다</h2>
+        <p class="anim d2" style="font-size:var(--type-body); line-height:1.55; color:var(--ink-2); margin-top:var(--gap-title); font-weight:500;">Hero는 도·소매 사장님이 매일 주류를 발주하는 B2B 플랫폼입니다. 이번 개편은 방문·주문 빈도가 가장 높은 <b style="color:var(--ink);">홈</b>과 <b style="color:var(--ink);">장바구니</b> 화면을 중심으로, 반복 주문의 효율과 현장 사용성을 끌어올리는 데 집중했습니다.</p>
+      </div>
+
+      <div style="display:flex; flex-direction:column; justify-content:center; gap:24px;">
+        <div class="anim d1" style="background:var(--bg-soft); border-radius:20px; padding:34px 38px;">
+          <div style="font-size:25px; font-weight:700; color:var(--ink-3); letter-spacing:.02em;">대상 화면</div>
+          <div style="font-size:44px; font-weight:800; margin-top:8px; letter-spacing:-.01em;">홈 · 장바구니</div>
+        </div>
+        <div class="anim d2" style="background:var(--bg-soft); border-radius:20px; padding:34px 38px;">
+          <div style="font-size:25px; font-weight:700; color:var(--ink-3); letter-spacing:.02em;">대응 디바이스</div>
+          <div style="font-size:44px; font-weight:800; margin-top:8px; letter-spacing:-.01em;">태블릿 &amp; 모바일</div>
+        </div>
+        <div class="anim d3" style="background:var(--bg-soft); border-radius:20px; padding:34px 38px;">
+          <div style="font-size:25px; font-weight:700; color:var(--ink-3); letter-spacing:.02em;">제안 시안</div>
+          <div style="font-size:44px; font-weight:800; margin-top:8px; letter-spacing:-.01em;"><span style="color:var(--blue);">A 블루</span> &nbsp;·&nbsp; <span style="color:var(--green);">B 그린</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 3. PRINCIPLES -->
+  <section data-label="디자인 원칙">
+    <div style="height:100%; display:flex; flex-direction:column;">
+      <span class="kicker anim">Design Principles</span>
+      <h2 class="anim d1" style="font-size:var(--type-title); font-weight:800; letter-spacing:-.02em; margin-top:18px;">두 시안이 공통으로 지키는 4가지 원칙</h2>
+
+      <div style="flex:1; display:grid; grid-template-columns:repeat(4,1fr); gap:30px; margin-top:56px;">
+        <div class="anim d1" style="display:flex; flex-direction:column;">
+          <div style="font-size:34px; font-weight:800; color:var(--ink-3);">01</div>
+          <div style="height:3px; background:var(--ink); width:46px; margin:20px 0 24px;"></div>
+          <h3 style="font-size:34px; font-weight:800; letter-spacing:-.01em;">재주문 중심</h3>
+          <p style="font-size:var(--type-small); color:var(--ink-2); line-height:1.5; margin-top:16px; font-weight:500;">최근주문 · 즐겨찾기 · 추천상품을 홈 최상단에 배치해 익숙한 주문을 즉시 반복.</p>
+        </div>
+        <div class="anim d1" style="display:flex; flex-direction:column;">
+          <div style="font-size:34px; font-weight:800; color:var(--ink-3);">02</div>
+          <div style="height:3px; background:var(--ink); width:46px; margin:20px 0 24px;"></div>
+          <h3 style="font-size:34px; font-weight:800; letter-spacing:-.01em;">박스 단위 발주</h3>
+          <p style="font-size:var(--type-small); color:var(--ink-2); line-height:1.5; margin-top:16px; font-weight:500;">입수·박스 정보와 큼직한 수량 스테퍼로 대량 발주의 실수를 줄임.</p>
+        </div>
+        <div class="anim d2" style="display:flex; flex-direction:column;">
+          <div style="font-size:34px; font-weight:800; color:var(--ink-3);">03</div>
+          <div style="height:3px; background:var(--ink); width:46px; margin:20px 0 24px;"></div>
+          <h3 style="font-size:34px; font-weight:800; letter-spacing:-.01em;">현장 사용성</h3>
+          <p style="font-size:var(--type-small); color:var(--ink-2); line-height:1.5; margin-top:16px; font-weight:500;">44px 이상 터치 영역과 '큰 글씨' 모드로 바쁜 매장에서도 오조작 최소화.</p>
+        </div>
+        <div class="anim d3" style="display:flex; flex-direction:column;">
+          <div style="font-size:34px; font-weight:800; color:var(--ink-3);">04</div>
+          <div style="height:3px; background:var(--ink); width:46px; margin:20px 0 24px;"></div>
+          <h3 style="font-size:34px; font-weight:800; letter-spacing:-.01em;">브랜드 탐색</h3>
+          <p style="font-size:var(--type-small); color:var(--ink-2); line-height:1.5; margin-top:16px; font-weight:500;">맥주·소주·수입주 카테고리와 브랜드 그리드로 신규 상품 발견을 유도.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 4. DIRECTION A COVER -->
+  <section data-label="시안 A" style="--acc:var(--blue); --acc-soft:var(--blue-soft);">
+    <div style="height:100%; display:grid; grid-template-columns:1fr 1fr; gap:80px; align-items:center;">
+      <div>
+        <div class="eyebrow-row anim"><span class="eyebrow-dot"></span><span class="kicker">Direction A</span></div>
+        <h2 class="anim d1" style="font-size:96px; font-weight:800; letter-spacing:-.03em; margin-top:26px; line-height:1;">시안 A<br><span style="color:var(--blue);">블루</span></h2>
+        <p class="anim d2" style="font-size:var(--type-subtitle); font-weight:700; color:var(--ink); margin-top:34px; letter-spacing:-.01em;">신뢰감 · 차분함</p>
+        <p class="anim d2" style="font-size:var(--type-body); color:var(--ink-2); line-height:1.5; margin-top:18px; font-weight:500; max-width:640px;">파스텔 블루 톤과 부드러운 라운드 카드로, 오래 봐도 편안하고 안정적인 발주 경험을 제공합니다.</p>
+      </div>
+      <div class="shots anim d1" style="--shot-h:760px;">
+        <div class="shot"><div class="frame" style="height:var(--shot-h);"><img src="assets/home_a.png" alt="시안 A 홈 태블릿"></div><span class="cap">태블릿 · 홈</span></div>
+        <div class="shot"><div class="frame" style="height:var(--shot-h);"><img src="assets/home_b.png" alt="시안 A 홈 모바일"></div><span class="cap">모바일 · 홈</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 5. A HOME -->
+  <section data-label="시안 A · 홈" style="--acc:var(--blue); --acc-soft:var(--blue-soft);">
+    <div style="height:100%; display:flex; flex-direction:column;">
+      <div class="head anim">
+        <div class="head-left">
+          <div class="eyebrow-row"><span class="eyebrow-dot"></span><span class="kicker">시안 A · 블루</span></div>
+          <h2 class="title">홈 화면 <span class="accent">Home</span></h2>
+        </div>
+        <span class="badge">태블릿 &amp; 모바일 대응</span>
+      </div>
+
+      <div style="flex:1; display:grid; grid-template-columns: 0.92fr 1.08fr; gap:64px; padding-top:44px; min-height:0;">
+        <div style="display:flex; flex-direction:column;">
+          <div class="block-label anim d1">디자인 특징</div>
+          <ul class="adv anim d1">
+            <li>최근주문 · 즐겨찾기 · 추천 탭 상단 고정<span>전체선택 후 '담기 / 주문하기'를 분리해, 반복 발주를 한 번의 동작으로 처리합니다.</span></li>
+            <li>하트 즐겨찾기 &amp; 파스텔 배너<span>부드러운 톤으로 정보 위계가 완만해 학습 부담이 적습니다.</span></li>
+            <li>제품컷 원형 브랜드 그리드<span>실제 병 이미지로 상품을 직관적으로 식별합니다.</span></li>
+          </ul>
+          <div class="why anim d2">
+            <div class="why-t">제안 이유</div>
+            <p>다양한 연령대의 점주에게 익숙한 UI로, 대량·장시간 발주 업무의 피로도를 낮추는 안정적인 선택입니다.</p>
+          </div>
+        </div>
+
+        <div class="shots anim d1" style="--shot-h:760px;">
+          <div class="shot"><div class="frame" style="height:var(--shot-h);"><img src="assets/home_a.png" alt="시안 A 홈 태블릿"></div><span class="cap">태블릿</span></div>
+          <div class="shot"><div class="frame" style="height:var(--shot-h);"><img src="assets/home_b.png" alt="시안 A 홈 모바일"></div><span class="cap">모바일</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 6. A CART -->
+  <section data-label="시안 A · 장바구니" style="--acc:var(--blue); --acc-soft:var(--blue-soft);">
+    <div style="height:100%; display:flex; flex-direction:column;">
+      <div class="head anim">
+        <div class="head-left">
+          <div class="eyebrow-row"><span class="eyebrow-dot"></span><span class="kicker">시안 A · 블루</span></div>
+          <h2 class="title">장바구니 <span class="accent">Cart</span></h2>
+        </div>
+        <span class="badge">태블릿 &amp; 모바일 대응</span>
+      </div>
+
+      <div style="flex:1; display:grid; grid-template-columns: 0.92fr 1.08fr; gap:64px; padding-top:44px; min-height:0;">
+        <div style="display:flex; flex-direction:column;">
+          <div class="block-label anim d1">디자인 특징</div>
+          <ul class="adv anim d1">
+            <li>지점 · 배송 정보 상단 요약<span>'선택 상품 / 배송 / 주문 금액'을 카드로 묶어 주문 전 확인을 명확히 합니다.</span></li>
+            <li>큼직한 수량 스테퍼<span>박스 단위 수량을 손쉽게 조정, 오입력을 줄입니다.</span></li>
+            <li>'자주 주문하는 상품' 추천 (모바일)<span>장바구니 안에서 바로 담아 재주문 동선을 단축합니다.</span></li>
+          </ul>
+          <div class="why anim d2">
+            <div class="why-t">제안 이유</div>
+            <p>주문 확정 직전 정보를 차분하게 정리해, 대량 발주에서 가장 중요한 '금액·수량 확인'의 신뢰도를 높입니다.</p>
+          </div>
+        </div>
+
+        <div class="shots anim d1" style="--shot-h:770px;">
+          <div class="shot"><div class="frame" style="height:var(--shot-h);"><img src="assets/cart_a.png" alt="시안 A 장바구니 태블릿"></div><span class="cap">태블릿</span></div>
+          <div class="shot"><div class="frame" style="height:var(--shot-h);"><img src="assets/cart_b.png" alt="시안 A 장바구니 모바일"></div><span class="cap">모바일</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 7. DIRECTION B COVER -->
+  <section data-label="시안 B" style="--acc:var(--green); --acc-soft:var(--green-soft);">
+    <div style="height:100%; display:grid; grid-template-columns:1fr 1fr; gap:80px; align-items:center;">
+      <div>
+        <div class="eyebrow-row anim"><span class="eyebrow-dot"></span><span class="kicker">Direction B</span></div>
+        <h2 class="anim d1" style="font-size:96px; font-weight:800; letter-spacing:-.03em; margin-top:26px; line-height:1;">시안 B<br><span style="color:var(--green);">그린</span></h2>
+        <p class="anim d2" style="font-size:var(--type-subtitle); font-weight:700; color:var(--ink); margin-top:34px; letter-spacing:-.01em;">활기 · 직관</p>
+        <p class="anim d2" style="font-size:var(--type-body); color:var(--ink-2); line-height:1.5; margin-top:18px; font-weight:500; max-width:640px;">생동감 있는 그린과 실제 브랜드 로고 그리드로, 탐색과 행동 유도가 빠른 활동적인 경험을 제공합니다.</p>
+      </div>
+      <div class="shots anim d1" style="--shot-h:760px;">
+        <div class="shot"><div class="frame" style="height:var(--shot-h);"><img src="assets/home_d.png" alt="시안 B 홈 태블릿"></div><span class="cap">태블릿 · 홈</span></div>
+        <div class="shot"><div class="frame" style="height:var(--shot-h);"><img src="assets/home_c.png" alt="시안 B 홈 모바일"></div><span class="cap">모바일 · 홈</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 8. B HOME -->
+  <section data-label="시안 B · 홈" style="--acc:var(--green); --acc-soft:var(--green-soft);">
+    <div style="height:100%; display:flex; flex-direction:column;">
+      <div class="head anim">
+        <div class="head-left">
+          <div class="eyebrow-row"><span class="eyebrow-dot"></span><span class="kicker">시안 B · 그린</span></div>
+          <h2 class="title">홈 화면 <span class="accent">Home</span></h2>
+        </div>
+        <span class="badge">태블릿 &amp; 모바일 대응</span>
+      </div>
+
+      <div style="flex:1; display:grid; grid-template-columns: 0.92fr 1.08fr; gap:64px; padding-top:44px; min-height:0;">
+        <div style="display:flex; flex-direction:column;">
+          <div class="block-label anim d1">디자인 특징</div>
+          <ul class="adv anim d1">
+            <li>실제 브랜드 로고 그리드<span>테라 · 카스 · 켈리 등 로고를 그대로 노출해 상품 인지와 탐색 속도를 높입니다.</span></li>
+            <li>별 즐겨찾기 &amp; 컬러 배지<span>유흥 · 가정 · 공용을 색으로 구분해 채널을 한눈에 파악합니다.</span></li>
+            <li>헤더 · CTA 그린 통일<span>브랜드 컬러로 행동 유도가 강하고 아이덴티티가 뚜렷합니다.</span></li>
+          </ul>
+          <div class="why anim d2">
+            <div class="why-t">제안 이유</div>
+            <p>신규·젊은 점주 유입과 브랜드 각인이 목표라면, 명확한 대비와 로고 중심 탐색이 전환에 유리합니다.</p>
+          </div>
+        </div>
+
+        <div class="shots anim d1" style="--shot-h:760px;">
+          <div class="shot"><div class="frame" style="height:var(--shot-h);"><img src="assets/home_d.png" alt="시안 B 홈 태블릿"></div><span class="cap">태블릿</span></div>
+          <div class="shot"><div class="frame" style="height:var(--shot-h);"><img src="assets/home_c.png" alt="시안 B 홈 모바일"></div><span class="cap">모바일</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 9. B CART -->
+  <section data-label="시안 B · 장바구니" style="--acc:var(--green); --acc-soft:var(--green-soft);">
+    <div style="height:100%; display:flex; flex-direction:column;">
+      <div class="head anim">
+        <div class="head-left">
+          <div class="eyebrow-row"><span class="eyebrow-dot"></span><span class="kicker">시안 B · 그린</span></div>
+          <h2 class="title">장바구니 <span class="accent">Cart</span></h2>
+        </div>
+        <span class="badge">태블릿 &amp; 모바일 대응</span>
+      </div>
+
+      <div style="flex:1; display:grid; grid-template-columns: 0.92fr 1.08fr; gap:64px; padding-top:44px; min-height:0;">
+        <div style="display:flex; flex-direction:column;">
+          <div class="block-label anim d1">디자인 특징</div>
+          <ul class="adv anim d1">
+            <li>전체 선택 (4/4) · 전체 삭제<span>선택 개수를 명시하고 삭제 동선을 분리해 대량 편집이 편리합니다.</span></li>
+            <li>넓은 폭의 수량 스테퍼<span>−/＋를 좌우 끝에 배치해 태블릿·모바일 모두 조작이 안정적입니다.</span></li>
+            <li>프로모션 배너 + 자주 주문 상품<span>할인 소식과 재주문 상품을 하단에 노출해 추가 구매를 유도합니다.</span></li>
+          </ul>
+          <div class="why anim d2">
+            <div class="why-t">제안 이유</div>
+            <p>그린 CTA와 명확한 배지로 '주문 확인'까지의 흐름이 빠르고, 프로모션 연계로 객단가 상승을 기대할 수 있습니다.</p>
+          </div>
+        </div>
+
+        <div class="shots anim d1" style="--shot-h:770px;">
+          <div class="shot"><div class="frame" style="height:var(--shot-h);"><img src="assets/cart_d.png" alt="시안 B 장바구니 태블릿"></div><span class="cap">태블릿</span></div>
+          <div class="shot"><div class="frame" style="height:var(--shot-h);"><img src="assets/cart_c.png" alt="시안 B 장바구니 모바일"></div><span class="cap">모바일</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 10. COMPARISON -->
+  <section data-label="시안 비교">
+    <div style="height:100%; display:flex; flex-direction:column;">
+      <span class="kicker anim">Comparison</span>
+      <h2 class="anim d1" style="font-size:var(--type-title); font-weight:800; letter-spacing:-.02em; margin-top:18px;">한눈에 보는 두 시안</h2>
+
+      <div class="anim d1" style="flex:1; display:grid; grid-template-columns: 0.8fr 1fr 1fr; margin-top:48px; border-top:2px solid var(--ink);">
+        <!-- header row -->
+        <div style="display:contents;">
+          <div style="padding:26px 8px; font-size:24px; font-weight:700; color:var(--ink-3);"></div>
+          <div style="padding:26px 32px; border-left:1px solid var(--line); background:var(--blue-soft);"><span style="font-size:30px; font-weight:800; color:var(--blue);">시안 A · 블루</span></div>
+          <div style="padding:26px 32px; border-left:1px solid var(--line); background:var(--green-soft);"><span style="font-size:30px; font-weight:800; color:var(--green);">시안 B · 그린</span></div>
+        </div>
+        <!-- rows -->
+        <div style="display:contents;">
+          <div style="padding:26px 8px; font-size:26px; font-weight:800; border-top:1px solid var(--line); display:flex; align-items:center;">무드</div>
+          <div style="padding:26px 32px; border-top:1px solid var(--line); border-left:1px solid var(--line); font-size:26px; font-weight:500; color:var(--ink-2); display:flex; align-items:center;">차분 · 신뢰 · 안정</div>
+          <div style="padding:26px 32px; border-top:1px solid var(--line); border-left:1px solid var(--line); font-size:26px; font-weight:500; color:var(--ink-2); display:flex; align-items:center;">활기 · 직관 · 선명</div>
+        </div>
+        <div style="display:contents;">
+          <div style="padding:26px 8px; font-size:26px; font-weight:800; border-top:1px solid var(--line); display:flex; align-items:center;">즐겨찾기</div>
+          <div style="padding:26px 32px; border-top:1px solid var(--line); border-left:1px solid var(--line); font-size:26px; font-weight:500; color:var(--ink-2); display:flex; align-items:center;">하트 (핑크)</div>
+          <div style="padding:26px 32px; border-top:1px solid var(--line); border-left:1px solid var(--line); font-size:26px; font-weight:500; color:var(--ink-2); display:flex; align-items:center;">별 (옐로) + 컬러 배지</div>
+        </div>
+        <div style="display:contents;">
+          <div style="padding:26px 8px; font-size:26px; font-weight:800; border-top:1px solid var(--line); display:flex; align-items:center;">브랜드 표현</div>
+          <div style="padding:26px 32px; border-top:1px solid var(--line); border-left:1px solid var(--line); font-size:26px; font-weight:500; color:var(--ink-2); display:flex; align-items:center;">제품컷 원형 아이콘</div>
+          <div style="padding:26px 32px; border-top:1px solid var(--line); border-left:1px solid var(--line); font-size:26px; font-weight:500; color:var(--ink-2); display:flex; align-items:center;">실제 브랜드 로고</div>
+        </div>
+        <div style="display:contents;">
+          <div style="padding:26px 8px; font-size:26px; font-weight:800; border-top:1px solid var(--line); border-bottom:1px solid var(--line); display:flex; align-items:center;">적합한 상황</div>
+          <div style="padding:26px 32px; border-top:1px solid var(--line); border-bottom:1px solid var(--line); border-left:1px solid var(--line); font-size:26px; font-weight:500; color:var(--ink-2); display:flex; align-items:center;">안정적 리텐션 · 폭넓은 연령</div>
+          <div style="padding:26px 32px; border-top:1px solid var(--line); border-bottom:1px solid var(--line); border-left:1px solid var(--line); font-size:26px; font-weight:500; color:var(--ink-2); display:flex; align-items:center;">신규 유입 · 브랜드 각인</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 11. NEXT STEPS -->
+  <section data-label="제안 및 다음 단계" style="--acc:var(--ink);">
+    <div style="height:100%; display:flex; flex-direction:column;">
+      <span class="kicker anim">Recommendation &amp; Next Steps</span>
+      <h2 class="anim d1" style="font-size:var(--type-title); font-weight:800; letter-spacing:-.02em; margin-top:18px; max-width:1200px; line-height:1.1;">두 시안을 나란히 검토한 뒤, 방향을 확정합니다</h2>
+
+      <div style="flex:1; display:grid; grid-template-columns:repeat(3,1fr); gap:34px; margin-top:64px;">
+        <div class="anim d1" style="border-top:3px solid var(--blue); padding-top:28px; display:flex; flex-direction:column;">
+          <div style="font-size:24px; font-weight:800; color:var(--ink-3);">STEP 1</div>
+          <h3 style="font-size:34px; font-weight:800; margin-top:14px; letter-spacing:-.01em;">시안 선택</h3>
+          <p style="font-size:var(--type-small); color:var(--ink-2); line-height:1.5; margin-top:16px; font-weight:500;">타깃 점주층과 브랜드 전략에 맞춰 A · B 중 방향을 확정하거나, 강점을 결합합니다.</p>
+        </div>
+        <div class="anim d2" style="border-top:3px solid var(--green); padding-top:28px; display:flex; flex-direction:column;">
+          <div style="font-size:24px; font-weight:800; color:var(--ink-3);">STEP 2</div>
+          <h3 style="font-size:34px; font-weight:800; margin-top:14px; letter-spacing:-.01em;">화면 확장</h3>
+          <p style="font-size:var(--type-small); color:var(--ink-2); line-height:1.5; margin-top:16px; font-weight:500;">상세 · 검색 · 주문내역 등 잔여 화면으로 디자인 시스템을 확장 적용합니다.</p>
+        </div>
+        <div class="anim d3" style="border-top:3px solid var(--ink); padding-top:28px; display:flex; flex-direction:column;">
+          <div style="font-size:24px; font-weight:800; color:var(--ink-3);">STEP 3</div>
+          <h3 style="font-size:34px; font-weight:800; margin-top:14px; letter-spacing:-.01em;">프로토타입 &amp; 검증</h3>
+          <p style="font-size:var(--type-small); color:var(--ink-2); line-height:1.5; margin-top:16px; font-weight:500;">인터랙션 프로토타입으로 점주 대상 사용성 테스트 후 개발 핸드오프.</p>
+        </div>
+      </div>
+
+      <div class="anim d3" style="margin-top:auto; padding-top:40px; border-top:1px solid var(--line); display:flex; justify-content:space-between; align-items:center;">
+        <span style="font-size:28px; font-weight:800; letter-spacing:-.01em;">Hero 주문 앱 UI/UX 개선</span>
+        <span style="font-size:var(--type-small); color:var(--ink-3); font-weight:600;">감사합니다 · 2025. 10</span>
+      </div>
+    </div>
+  </section>
+
+</deck-stage>
+<script src="deck-stage.js"></script>
+</body>
+</html>

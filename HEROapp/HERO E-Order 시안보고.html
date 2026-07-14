@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>HERO E-Order App · UI/UX Proposal</title>
+<link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css">
+<style>
+  :root{
+    --green:#4BA86B;
+    --blue:#2D91FF;
+    --purple:#744BE9;
+    --ink:#1A1E24;
+    --ink-2:#5B6472;
+    --ink-3:#98A0AD;
+    --line:#E6E9EE;
+    --bg-soft:#F3F5F8;
+
+    --pad: 92px;
+    --type-title: 108px;
+    --type-h2: 60px;
+    --type-body: 30px;
+    --type-small: 25px;
+    --type-num: 88px;
+    --type-eyebrow: 26px;
+  }
+  *{ box-sizing:border-box; }
+  html,body{ margin:0; padding:0; background:#0B0E12; }
+  deck-stage:not(:defined){ visibility:hidden; }
+  body{ font-family:"Pretendard","Pretendard Variable",-apple-system,system-ui,sans-serif; color:var(--ink); -webkit-font-smoothing:antialiased; letter-spacing:-.01em; }
+  h1,h2,h3,p{ margin:0; }
+  /* Display type: Hitejinro Harmony B → Pretendard fallback */
+  .wm,h1,h2,.num,.ctitle{ font-family:"Harmony B","HY Harmony B","Pretendard","Pretendard Variable",system-ui,sans-serif; }
+
+  section{ background:#fff; color:var(--ink); padding:var(--pad); overflow:hidden; position:relative; }
+
+  /* giant watermark letter */
+  .wm{ position:absolute; font-weight:900; line-height:.8; pointer-events:none; user-select:none; z-index:0; }
+
+  .content{ position:relative; z-index:2; height:100%; }
+
+  .eyebrow{ display:inline-flex; align-items:center; gap:14px; font-size:var(--type-eyebrow); font-weight:800; letter-spacing:.04em; }
+  .eyebrow .tag{ background:var(--c,#1A1E24); color:#fff; padding:6px 16px; border-radius:6px; }
+
+  /* ---------- device frames ---------- */
+  .phone{ background:#0C0E11; border-radius:38px; padding:9px; box-shadow:0 42px 80px -34px rgba(20,24,32,.5), 0 8px 20px -10px rgba(20,24,32,.3); flex:none; }
+  .phone .screen{ border-radius:30px; overflow:hidden; background:#fff; width:100%; height:100%; }
+  .tablet{ background:#0C0E11; border-radius:26px; padding:11px; box-shadow:0 42px 80px -34px rgba(20,24,32,.5), 0 8px 20px -10px rgba(20,24,32,.3); flex:none; }
+  .tablet .screen{ border-radius:16px; overflow:hidden; background:#fff; width:100%; height:100%; }
+  .screen img{ display:block; width:100%; height:100%; object-fit:cover; object-position:top; }
+  .devcap{ text-align:center; font-size:25px; font-weight:700; color:var(--ink-3); margin-top:16px; letter-spacing:.02em; }
+  .devwrap{ display:flex; flex-direction:column; align-items:center; }
+
+  .num{ font-size:var(--type-num); font-weight:900; line-height:1; letter-spacing:-.03em; }
+  .ctitle{ font-size:var(--type-h2); font-weight:800; letter-spacing:-.02em; }
+  .cdesc{ font-size:var(--type-body); line-height:1.55; color:var(--ink-2); font-weight:500; }
+
+  .chip{ display:inline-flex; align-items:center; gap:10px; font-size:var(--type-small); font-weight:800; padding:11px 20px; border-radius:100px; color:#fff; }
+  .chip .dot{ width:12px; height:12px; border-radius:50%; background:#fff; }
+
+  @media (prefers-reduced-motion:no-preference){
+    [data-deck-active] .anim{ animation:rise .6s cubic-bezier(.2,.7,.2,1) both; }
+    [data-deck-active] .anim.d1{ animation-delay:.07s; }
+    [data-deck-active] .anim.d2{ animation-delay:.14s; }
+    [data-deck-active] .anim.d3{ animation-delay:.21s; }
+    @keyframes rise{ from{ opacity:0; transform:translateY(24px);} to{ opacity:1; transform:none;} }
+  }
+  a{ color:var(--blue); } a:hover{ color:#1c6fd0; }
+</style>
+</head>
+<body>
+<deck-stage width="1920" height="1207">
+
+  <!-- 1. COVER -->
+  <section data-label="표지" style="background:var(--green);">
+    <div class="wm" style="right:40px; top:100px; font-size:1160px; color:#fff; opacity:.13;">H</div>
+    <div class="content" style="display:flex; flex-direction:column; justify-content:space-between; color:#fff;">
+      <div class="eyebrow anim" style="color:#ffffff;"><span class="tag" style="background:rgba(255,255,255,.22);">HERO</span><span>E-Order App</span></div>
+
+      <div style="max-width:1150px;">
+        <h1 class="anim d1" style="font-size:var(--type-title); font-weight:900; line-height:1.02; letter-spacing:-.03em;">E-Order App<br>UI/UX Proposal</h1>
+        <p class="anim d2" style="font-size:38px; font-weight:600; margin-top:28px; opacity:.92;">주류 주문 앱 HERO · 화면 개선 시안 보고 &nbsp;<span style="opacity:.7;">01 / 02</span></p>
+      </div>
+
+      <div class="anim d3" style="display:grid; grid-template-columns:1fr 1fr 1.2fr; gap:56px; max-width:1560px;">
+        <div>
+          <div style="font-size:25px; font-weight:800; letter-spacing:.1em; opacity:.72; margin-bottom:16px;">타겟 사용자</div>
+          <div style="font-size:28px; font-weight:700; line-height:1.5;">40~60대 사용자 중심 UX<br>높은 가독성 · 낮은 시각 피로도 · 주문 프로세스 단순화</div>
+        </div>
+        <div>
+          <div style="font-size:25px; font-weight:800; letter-spacing:.1em; opacity:.72; margin-bottom:16px;">톤 &amp; 무드</div>
+          <div style="font-size:28px; font-weight:700; line-height:1.5;">밝고 선명하게 · 컬러풀하게<br>즐겁고 활기찬 인상<br><span style="opacity:.72; font-weight:600;">낮은 명도·채도, 바랜·빈티지 톤 지양</span></div>
+        </div>
+        <div>
+          <div style="font-size:25px; font-weight:800; letter-spacing:.1em; opacity:.72; margin-bottom:16px;">컬러 방향</div>
+          <div style="display:flex; flex-wrap:wrap; gap:12px 14px; font-size:26px; font-weight:800;">
+            <span style="background:rgba(255,255,255,.24); padding:8px 20px; border-radius:100px;">테라 그린 · 메인</span>
+            <span style="background:rgba(45,145,255,.95); padding:8px 20px; border-radius:100px;">블루 · 베이스</span>
+            <span style="background:rgba(245,57,155,.95); padding:8px 20px; border-radius:100px;">핑크 · 포인트</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 2. CONCEPT 01 · 신뢰형 (파랑) — 시안 -->
+  <section data-label="01 신뢰형 · 시안" style="--c:var(--blue);">
+    <div class="wm" style="right:-90px; top:-200px; font-size:1100px; color:var(--blue); opacity:.06;">H</div>
+    <div class="content" style="display:flex; flex-direction:column;">
+      <div style="display:flex; align-items:flex-start; justify-content:space-between; gap:60px;">
+        <div style="max-width:1000px;">
+          <div class="eyebrow anim" style="color:var(--blue); margin-bottom:20px;"><span class="tag">HERO</span><span>E-Order App</span></div>
+          <div style="display:flex; align-items:baseline; gap:26px;" class="anim d1">
+            <span class="num" style="color:var(--blue);">01.</span>
+            <h2 class="ctitle">신뢰형 <span style="color:var(--blue);">(파랑)</span></h2>
+          </div>
+          <p class="cdesc anim d1" style="margin-top:24px; max-width:1050px; font-family:pretendard; font-size:26px;">참이슬·진로의 <b style="color:var(--ink);">블루</b>를 베이스 컬러로 삼아 정보 위계를 또렷하게 정리한 방향입니다.<br>채도를 유지한 선명한 블루로 신뢰감을 전하고, <b style="color:var(--ink);">핑크 포인트</b>로 즐겨찾기·미결제 등 강조 요소를<br>명확히 분리해 가독성과 활기를 동시에 확보했습니다. 낮은 명도·바랜 톤을 배제해 장시간 발주에도 흐릿하지 않은 화면을 설계했습니다.</p>
+        </div>
+        <span class="chip anim" style="background:var(--blue);"><span class="dot"></span>모바일 · 태블릿</span>
+      </div>
+
+      <div class="anim d2" style="flex:1; display:flex; align-items:center; justify-content:center; gap:56px; margin-top:8px;">
+        <div class="devwrap"><div class="phone" style="width:224px; height:472px;"><div class="screen"><img src="assets/home_b.png" alt="홈 모바일"></div></div><div class="devcap" style="font-size:20px; color:#1A1E25; font-family:'Harmony B'; font-weight:700;">홈 · 모바일</div></div>
+        <div class="devwrap"><div class="tablet" style="width:372px; height:472px;"><div class="screen"><img src="assets/home_a.png" alt="홈 태블릿"></div></div><div class="devcap" style="font-size:20px; color:#1A1E25; font-family:'Harmony B'; font-weight:700;">홈 · 태블릿</div></div>
+        <div style="width:1px; height:420px; background:var(--line);"></div>
+        <div class="devwrap"><div class="phone" style="width:224px; height:472px;"><div class="screen"><img src="assets/cart_b.png" alt="장바구니 모바일"></div></div><div class="devcap" style="font-size:20px; color:#1A1E25; font-family:'Harmony B'; font-weight:700;">장바구니 · 모바일</div></div>
+        <div class="devwrap"><div class="tablet" style="width:372px; height:472px;"><div class="screen"><img src="assets/cart_a.png" alt="장바구니 태블릿"></div></div><div class="devcap" style="font-size:20px; color:#1A1E25; font-family:'Harmony B'; font-weight:700;">장바구니 · 태블릿</div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 3. CONCEPT 01 · 광고 키비주얼 -->
+  <section data-label="01 신뢰형 · 광고" style="--c:var(--blue); background:linear-gradient(120deg,#eaf3ff 0%,#dcebff 100%);">
+    <div class="content" style="display:flex; align-items:center; gap:40px;">
+      <div style="flex:0 0 44%;">
+        <div class="eyebrow anim" style="color:var(--blue); margin-bottom:26px;"><span class="tag">HERO</span><span>E-Order App</span></div>
+        <h2 class="anim d1" style="font-size:82px; font-weight:900; line-height:1.08; letter-spacing:-.03em;">한 손에 담는<br>믿을 수 있는 주문</h2>
+        <p class="anim d2" style="font-size:30px; line-height:1.55; color:var(--ink-2); font-weight:500; margin-top:26px; max-width:620px;">차분한 블루 UI로 어디서든 빠르고 정확하게. 최근주문부터 결제까지, 사장님의 발주를 가장 신뢰감 있게 안내합니다.</p>
+        <span class="chip anim d3" style="background:var(--blue); margin-top:34px;"><span class="dot"></span>신뢰형 · 파랑</span>
+      </div>
+
+      <div class="anim d2" style="flex:1; position:relative; height:100%;">
+        <!-- lifestyle photo panel -->
+        <div style="position:absolute; inset:0; border-radius:36px; overflow:hidden; box-shadow:0 40px 90px -40px rgba(20,50,100,.5);">
+          <image-slot id="ad_blue" shape="rect" placeholder="손에 든 라이프스타일 사진을 드래그해 넣어주세요"></image-slot>
+        </div>
+        <!-- floating phone -->
+        <div class="phone" style="position:absolute; right:70px; bottom:-40px; width:300px; height:632px; transform:rotate(-7deg); z-index:3;"><div class="screen"><img src="assets/home_b.png" alt="HERO 홈 화면"></div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 4. CONCEPT 02 · 친화형 (초록) — 시안 -->
+  <section data-label="02 친화형 · 시안" style="--c:var(--green);">
+    <div class="wm" style="right:-90px; top:-200px; font-size:1100px; color:var(--green); opacity:.07;">H</div>
+    <div class="content" style="display:flex; flex-direction:column;">
+      <div style="display:flex; align-items:flex-start; justify-content:space-between; gap:60px;">
+        <div style="max-width:1000px;">
+          <div class="eyebrow anim" style="color:var(--green); margin-bottom:20px;"><span class="tag">HERO</span><span>E-Order App</span></div>
+          <div style="display:flex; align-items:baseline; gap:26px;" class="anim d1">
+            <span class="num" style="color:var(--green);">02.</span>
+            <h2 class="ctitle">친화형 <span style="color:var(--green);">(초록)</span></h2>
+          </div>
+          <p class="cdesc anim d1" style="margin-top:24px; max-width:1050px;">메인 브랜드 컬러인 <b style="color:var(--ink);">테라 그린</b>을 축으로, 경영진이 선호하는 밝고 컬러풀한 무드를 전면에 적용한 방향입니다. 실제 브랜드 로고와 선명한 그린 CTA로 즐겁고 활기찬 인상을 만들고, 블루·핑크를 보조 포인트로 배치해 ‘같은 맥락’의 톤 통일감을 유지했습니다. 높은 채도의 컬러로 ‘사람을 즐겁게 하는’ 브랜드 정체성을 시각적으로 강화했습니다.</p>
+        </div>
+        <span class="chip anim" style="background:var(--green);"><span class="dot"></span>모바일 · 태블릿</span>
+      </div>
+
+      <div class="anim d2" style="flex:1; display:flex; align-items:center; justify-content:center; gap:56px; margin-top:8px;">
+        <div class="devwrap"><div class="phone" style="width:224px; height:472px;"><div class="screen"><img src="assets/home_c.png" alt="홈 모바일"></div></div><div class="devcap">홈 · 모바일</div></div>
+        <div class="devwrap"><div class="tablet" style="width:372px; height:472px;"><div class="screen"><img src="assets/home_d.png" alt="홈 태블릿"></div></div><div class="devcap">홈 · 태블릿</div></div>
+        <div style="width:1px; height:420px; background:var(--line);"></div>
+        <div class="devwrap"><div class="phone" style="width:224px; height:472px;"><div class="screen"><img src="assets/cart_c.png" alt="장바구니 모바일"></div></div><div class="devcap">장바구니 · 모바일</div></div>
+        <div class="devwrap"><div class="tablet" style="width:372px; height:472px;"><div class="screen"><img src="assets/cart_d.png" alt="장바구니 태블릿"></div></div><div class="devcap">장바구니 · 태블릿</div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 5. CONCEPT 02 · 광고 키비주얼 -->
+  <section data-label="02 친화형 · 광고" style="--c:var(--green); background:linear-gradient(120deg,#e9f6ee 0%,#dcf0e4 100%);">
+    <div class="content" style="display:flex; align-items:center; gap:40px;">
+      <div style="flex:0 0 44%;">
+        <div class="eyebrow anim" style="color:var(--green); margin-bottom:26px;"><span class="tag">HERO</span><span>E-Order App</span></div>
+        <h2 class="anim d1" style="font-size:82px; font-weight:900; line-height:1.08; letter-spacing:-.03em;">매일의 발주가<br>더 편안하게</h2>
+        <p class="anim d2" style="font-size:30px; line-height:1.55; color:var(--ink-2); font-weight:500; margin-top:26px; max-width:620px;">눈이 편한 그린 UI와 익숙한 동선으로. 자주 찾는 상품을 한눈에, 반복 주문을 가장 친숙하게 담아내는 HERO입니다.</p>
+        <span class="chip anim d3" style="background:var(--green); margin-top:34px;"><span class="dot"></span>친화형 · 초록</span>
+      </div>
+
+      <div class="anim d2" style="flex:1; position:relative; height:100%;">
+        <div style="position:absolute; inset:0; border-radius:36px; overflow:hidden; box-shadow:0 40px 90px -40px rgba(30,90,50,.5);">
+          <image-slot id="ad_green" shape="rect" placeholder="손에 든 라이프스타일 사진을 드래그해 넣어주세요"></image-slot>
+        </div>
+        <div class="phone" style="position:absolute; right:70px; bottom:-40px; width:300px; height:632px; transform:rotate(-7deg); z-index:3;"><div class="screen"><img src="assets/home_c.png" alt="HERO 홈 화면"></div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 6. 마무리 / 다음 단계 -->
+  <section data-label="다음 단계" style="background:var(--green);">
+    <div class="wm" style="right:-60px; bottom:-360px; font-size:1300px; color:#fff; opacity:.14;">H</div>
+    <div class="content" style="display:flex; flex-direction:column; justify-content:center; color:#fff;">
+      <div class="eyebrow anim" style="color:#fff; margin-bottom:34px;"><span class="tag" style="background:rgba(255,255,255,.22);">HERO</span><span>E-Order App</span></div>
+      <h2 class="anim d1" style="font-size:76px; font-weight:900; line-height:1.1; letter-spacing:-.03em; max-width:1300px;">두 시안을 검토해 방향을 확정하고,<br>전체 화면으로 확장합니다</h2>
+      <div class="anim d2" style="display:grid; grid-template-columns:repeat(3,1fr); gap:50px; margin-top:70px; max-width:1500px;">
+        <div><div style="font-size:24px; font-weight:800; opacity:.72;">STEP 1</div><div style="font-size:34px; font-weight:800; margin-top:12px;">시안 선택</div><div style="font-size:24px; opacity:.9; margin-top:12px; line-height:1.5;">신뢰형(블루) · 친화형(테라 그린) 중 방향 확정</div></div>
+        <div><div style="font-size:24px; font-weight:800; opacity:.72;">STEP 2</div><div style="font-size:34px; font-weight:800; margin-top:12px;">화면 확장</div><div style="font-size:24px; opacity:.9; margin-top:12px; line-height:1.5;">상세 · 검색 · 주문내역까지 디자인 시스템 적용</div></div>
+        <div><div style="font-size:24px; font-weight:800; opacity:.72;">STEP 3</div><div style="font-size:34px; font-weight:800; margin-top:12px;">프로토타입</div><div style="font-size:24px; opacity:.9; margin-top:12px; line-height:1.5;">사용성 검증 후 개발 핸드오프</div></div>
+      </div>
+    </div>
+  </section>
+
+</deck-stage>
+<script src="image-slot.js"></script>
+<script src="deck-stage.js"></script>
+</body>
+</html>
