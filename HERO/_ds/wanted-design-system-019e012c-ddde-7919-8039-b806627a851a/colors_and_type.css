@@ -1,0 +1,307 @@
+/* =============================================================================
+   Wanted Design System — Colors & Typography
+   Tokens are mirrored from the Figma library "Wanted Design System (Community)".
+   Naming follows the system convention: color-{global|semantic}-{role}-{variant}.
+   ============================================================================= */
+
+/* ---------- FONTS -------------------------------------------------- */
+/* Pretendard JP — primary UI typeface (KR/JP/EN). Self-hosted via cdn jsDelivr. */
+@import url('https://cdn.jsdelivr.net/gh/orioncactus/pretendard-jp@v0.0.4/dist/web/static/pretendard-jp.css');
+/* Wanted Sans — display/brand typeface */
+@import url('https://cdn.jsdelivr.net/gh/wanteddev/wanted-sans@v1.0.4/packages/wanted-sans/fonts/webfonts/static/complete/WantedSans.min.css');
+/* Wanted Sans Variable — used for very large display headers */
+@import url('https://cdn.jsdelivr.net/gh/wanteddev/wanted-sans@v1.0.4/packages/wanted-sans/fonts/webfonts/variable/complete/WantedSansVariable.min.css');
+
+:root {
+  /* ============================================================
+     GLOBAL PALETTE — atomic, role-agnostic. Reference these for tokens.
+     11 hues × 11 steps (50, 100…900, 950) + neutrals.
+     ============================================================ */
+
+  /* Neutral (true grey) */
+  --color-global-neutral-0:   #ffffff;
+  --color-global-neutral-50:  #fafafa;
+  --color-global-neutral-100: #f4f4f5;
+  --color-global-neutral-200: #e4e4e7;
+  --color-global-neutral-300: #d4d4d8;
+  --color-global-neutral-400: #a1a1aa;
+  --color-global-neutral-500: #71717a;
+  --color-global-neutral-600: #52525b;
+  --color-global-neutral-700: #3f3f46;
+  --color-global-neutral-800: #27272a;
+  --color-global-neutral-900: #18181b;
+  --color-global-neutral-950: #09090b;
+
+  /* Cool neutral (slight blue cast) — used as the primary grey scale in product UI */
+  --color-global-coolNeutral-50:  #f7f7f8;
+  --color-global-coolNeutral-100: #f4f4f5;
+  --color-global-coolNeutral-200: #dbdcdf;
+  --color-global-coolNeutral-300: #c2c4c8;
+  --color-global-coolNeutral-400: #aeb0b6;
+  --color-global-coolNeutral-500: #989ba2;
+  --color-global-coolNeutral-600: #70737c;
+  --color-global-coolNeutral-700: #46474c;
+  --color-global-coolNeutral-800: #2e2f33;
+  --color-global-coolNeutral-900: #1b1c1e;
+  --color-global-coolNeutral-950: #0e0f10;
+
+  /* Blue — brand primary */
+  --color-global-blue-50:  #eaf2fe;
+  --color-global-blue-100: #d6e4fd;
+  --color-global-blue-200: #adc8fb;
+  --color-global-blue-300: #84acf9;
+  --color-global-blue-400: #5b91f7;
+  --color-global-blue-500: #3385ff;
+  --color-global-blue-600: #0066ff;     /* primary */
+  --color-global-blue-700: #005eeb;
+  --color-global-blue-800: #0052cc;
+  --color-global-blue-900: #003d99;
+  --color-global-blue-950: #002966;
+
+  /* Red — destructive / error */
+  --color-global-red-50:  #fff0f0;
+  --color-global-red-100: #ffd7d7;
+  --color-global-red-200: #ffb0b0;
+  --color-global-red-300: #ff8989;
+  --color-global-red-400: #ff6b6b;
+  --color-global-red-500: #ff4242;
+  --color-global-red-600: #e61f1f;
+  --color-global-red-700: #c00000;
+  --color-global-red-800: #990000;
+  --color-global-red-900: #660000;
+
+  /* Green — positive / success */
+  --color-global-green-50:  #e6fff0;
+  --color-global-green-100: #b8ffd0;
+  --color-global-green-200: #80ffb0;
+  --color-global-green-300: #40ee85;
+  --color-global-green-400: #00d957;
+  --color-global-green-500: #00bf40;
+  --color-global-green-600: #00a637;
+  --color-global-green-700: #008c2f;
+  --color-global-green-800: #007326;
+  --color-global-green-900: #00591d;
+
+  /* Orange — warning / accent */
+  --color-global-orange-500: #ff9b00;
+  --color-global-orange-600: #f08200;
+  --color-global-orange-700: #d96e00;
+
+  /* Red-Orange — accent (signature accent for "highlight" callouts) */
+  --color-global-redOrange-500: #ff6940;
+  --color-global-redOrange-600: #f25c33;
+
+  /* Lime */
+  --color-global-lime-500: #6bc400;
+
+  /* Cyan */
+  --color-global-cyan-500: #0098b2;
+
+  /* Light blue */
+  --color-global-lightBlue-500: #3eb3f7;
+
+  /* Violet (secondary brand accent — used in marketing strokes) */
+  --color-global-violet-500: #9747ff;
+  --color-global-violet-600: #6541f2;
+
+  /* Purple */
+  --color-global-purple-500: #a056ff;
+  --color-global-purple-50:  #f0ecfe;
+
+  /* Pink */
+  --color-global-pink-500: #ff4f87;
+
+  /* ============================================================
+     SEMANTIC TOKENS — light theme (default).
+     These are the only tokens product surfaces should reference.
+     ============================================================ */
+
+  /* — Primary (Wanted brand blue) — */
+  --color-primary-normal:  var(--color-global-blue-600);
+  --color-primary-strong:  var(--color-global-blue-700);
+  --color-primary-heavy:   var(--color-global-blue-800);
+
+  /* — Label (foreground / text) — */
+  --color-label-normal:    rgba(23, 23, 25, 1);       /* near-black */
+  --color-label-strong:    #000000;
+  --color-label-neutral:   rgba(46, 47, 51, 0.88);
+  --color-label-alternative: rgba(55, 56, 60, 0.61);
+  --color-label-assistive: rgba(55, 56, 60, 0.28);
+  --color-label-disable:   rgba(55, 56, 60, 0.16);
+
+  /* — Background — */
+  --color-background-normal-normal:    #ffffff;
+  --color-background-normal-alternative: #f7f7f8;
+  --color-background-elevated-normal:  #ffffff;
+  --color-background-elevated-alternative: #f7f7f8;
+  --color-background-neutral:          rgba(112, 115, 124, 0.05);
+
+  /* — Line / Border — */
+  --color-line-normal-normal:      rgba(112, 115, 124, 0.22);
+  --color-line-normal-neutral:     rgba(112, 115, 124, 0.16);
+  --color-line-solid-normal:       #dbdcdf;
+  --color-line-solid-neutral:      #e4e4e7;
+
+  /* — Status — */
+  --color-status-positive:    var(--color-global-green-500);  /* #00BF40 */
+  --color-status-cautionary:  var(--color-global-orange-500);
+  --color-status-destructive: var(--color-global-red-500);    /* #FF4242 */
+
+  /* — Interaction states — */
+  --color-interaction-inactive: rgba(112, 115, 124, 0.53);
+  --color-interaction-disable:  rgba(112, 115, 124, 0.16);
+
+  /* — Static — */
+  --color-static-white: #ffffff;
+  --color-static-black: #000000;
+
+  /* — Inverse — */
+  --color-inverse-primary:    #ffffff;
+  --color-inverse-background: #1b1c1e;
+  --color-inverse-label:      #ffffff;
+
+  /* — Accent backgrounds (used for badges, callouts) — */
+  --color-accent-bg-blue:      #eaf2fe;
+  --color-accent-bg-redOrange: #fff0eb;
+  --color-accent-bg-violet:    #f0ecfe;
+  --color-accent-bg-green:     #e6fff0;
+  --color-accent-bg-red:       #fff0f0;
+  --color-accent-bg-neutral:   rgba(112, 115, 124, 0.08);
+
+  /* — Accent foregrounds — */
+  --color-accent-fg-blue:      var(--color-global-blue-600);
+  --color-accent-fg-redOrange: var(--color-global-redOrange-600);
+  --color-accent-fg-violet:    var(--color-global-violet-600);
+  --color-accent-fg-green:     var(--color-global-green-700);
+  --color-accent-fg-red:       var(--color-global-red-600);
+
+  /* ============================================================
+     TYPOGRAPHY — primary stack is Pretendard JP for product;
+     Wanted Sans is reserved for marketing/display.
+     ============================================================ */
+  --font-sans:   "Pretendard JP", "Pretendard", -apple-system, BlinkMacSystemFont, system-ui, "Apple SD Gothic Neo", "Noto Sans KR", sans-serif;
+  --font-display: "Wanted Sans Variable", "Wanted Sans", "Pretendard JP", sans-serif;
+  --font-mono:   "SF Mono", "JetBrains Mono", "Cascadia Code", Menlo, Consolas, monospace;
+
+  /* — Type scale (sizes from Figma typography frame) — */
+  --text-display-1-size: 56px;  --text-display-1-line: 1.20; --text-display-1-spacing: -0.030em; --text-display-1-weight: 700;
+  --text-display-2-size: 36px;  --text-display-2-line: 1.33; --text-display-2-spacing: -0.027em; --text-display-2-weight: 700;
+  --text-title-1-size: 28px;    --text-title-1-line: 1.36; --text-title-1-spacing: -0.024em; --text-title-1-weight: 700;
+  --text-title-2-size: 24px;    --text-title-2-line: 1.33; --text-title-2-spacing: -0.023em; --text-title-2-weight: 700;
+  --text-heading-1-size: 22px;  --text-heading-1-line: 1.36; --text-heading-1-spacing: -0.020em; --text-heading-1-weight: 600;
+  --text-heading-2-size: 20px;  --text-heading-2-line: 1.40; --text-heading-2-spacing: -0.017em; --text-heading-2-weight: 600;
+  --text-headline-1-size: 18px; --text-headline-1-line: 1.44; --text-headline-1-spacing: -0.013em; --text-headline-1-weight: 600;
+  --text-headline-2-size: 17px; --text-headline-2-line: 1.41; --text-headline-2-spacing: -0.011em; --text-headline-2-weight: 600;
+  --text-body-1-size: 16px;     --text-body-1-line: 1.50; --text-body-1-spacing: 0.006em; --text-body-1-weight: 500;
+  --text-body-1r-size: 16px;    --text-body-1r-line: 1.50; --text-body-1r-spacing: 0.006em; --text-body-1r-weight: 400;
+  --text-body-2-size: 15px;     --text-body-2-line: 1.47; --text-body-2-spacing: 0.010em; --text-body-2-weight: 500;
+  --text-label-1-size: 14px;    --text-label-1-line: 1.43; --text-label-1-spacing: 0.014em; --text-label-1-weight: 600;
+  --text-label-2-size: 13px;    --text-label-2-line: 1.38; --text-label-2-spacing: 0.018em; --text-label-2-weight: 600;
+  --text-caption-1-size: 12px;  --text-caption-1-line: 1.33; --text-caption-1-spacing: 0.025em; --text-caption-1-weight: 500;
+  --text-caption-2-size: 11px;  --text-caption-2-line: 1.27; --text-caption-2-spacing: 0.031em; --text-caption-2-weight: 700;
+
+  /* ============================================================
+     RADII
+     ============================================================ */
+  --radius-2:   2px;
+  --radius-4:   4px;
+  --radius-8:   8px;
+  --radius-12: 12px;
+  --radius-16: 16px;
+  --radius-24: 24px;
+  --radius-32: 32px;
+  --radius-full: 9999px;
+
+  /* ============================================================
+     SPACING — 4px base
+     ============================================================ */
+  --space-1: 4px;  --space-2: 8px;  --space-3: 12px; --space-4: 16px;
+  --space-5: 20px; --space-6: 24px; --space-7: 28px; --space-8: 32px;
+  --space-10: 40px; --space-12: 48px; --space-16: 64px; --space-20: 80px;
+  --space-24: 96px; --space-32: 128px;
+
+  /* ============================================================
+     ELEVATION
+     ============================================================ */
+  --shadow-emphasize: 0 1px 4px 0 rgba(0,0,0,0.08), 0 1px 2px 0 rgba(23,23,23,0.07);
+  --shadow-strong:    0 6px 16px 0 rgba(23,23,23,0.10), 0 2px 4px 0 rgba(0,0,0,0.06);
+  --shadow-heavy:     0 12px 32px 0 rgba(23,23,23,0.12), 0 4px 8px 0 rgba(0,0,0,0.06);
+
+  /* Mobile safe areas (Wanted uses these as design tokens, not just env()) */
+  --safe-status-ios:     44px;
+  --safe-status-android: 24px;
+  --safe-bottom-ios:     34px;
+  --safe-nav-android:    48px;
+
+  /* Grid */
+  --grid-mobile-cols: 4;
+  --grid-mobile-gutter: 16px;
+  --grid-mobile-margin: 20px;
+  --grid-tablet-cols: 8;
+  --grid-tablet-gutter: 24px;
+  --grid-tablet-margin: 32px;
+  --grid-desktop-cols: 12;
+  --grid-desktop-gutter: 24px;
+  --grid-desktop-margin: 80px;
+}
+
+/* ---------- DARK THEME -------------------------------------------- */
+[data-theme="dark"] {
+  --color-label-normal:        rgba(247, 247, 248, 0.96);
+  --color-label-strong:        #ffffff;
+  --color-label-neutral:       rgba(247, 247, 248, 0.88);
+  --color-label-alternative:   rgba(247, 247, 248, 0.61);
+  --color-label-assistive:     rgba(247, 247, 248, 0.28);
+  --color-label-disable:       rgba(247, 247, 248, 0.16);
+
+  --color-background-normal-normal:    #1b1c1e;
+  --color-background-normal-alternative: #131415;
+  --color-background-elevated-normal:  #2e2f33;
+  --color-background-elevated-alternative: #46474c;
+  --color-background-neutral:  rgba(174, 176, 182, 0.07);
+
+  --color-line-normal-normal:  rgba(174, 176, 182, 0.22);
+  --color-line-normal-neutral: rgba(174, 176, 182, 0.14);
+  --color-line-solid-normal:   #46474c;
+
+  --color-primary-normal:      var(--color-global-blue-500);
+  --color-primary-strong:      var(--color-global-blue-400);
+
+  --color-inverse-primary:     #1b1c1e;
+  --color-inverse-background:  #ffffff;
+  --color-inverse-label:       #1b1c1e;
+
+  --color-accent-bg-blue:      rgba(0, 102, 255, 0.16);
+  --color-accent-bg-redOrange: rgba(255, 105, 64, 0.16);
+  --color-accent-bg-violet:    rgba(151, 71, 255, 0.20);
+  --color-accent-bg-green:     rgba(0, 191, 64, 0.18);
+  --color-accent-bg-red:       rgba(255, 66, 66, 0.18);
+}
+
+/* ---------- TYPE UTILITIES ---------------------------------------- */
+html, body { font-family: var(--font-sans); color: var(--color-label-normal); background: var(--color-background-normal-normal); }
+body { font-size: 16px; line-height: 1.5; letter-spacing: 0.006em; -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; }
+
+.t-display-1 { font: var(--text-display-1-weight) var(--text-display-1-size)/var(--text-display-1-line) var(--font-sans); letter-spacing: var(--text-display-1-spacing); }
+.t-display-2 { font: var(--text-display-2-weight) var(--text-display-2-size)/var(--text-display-2-line) var(--font-sans); letter-spacing: var(--text-display-2-spacing); }
+.t-title-1   { font: var(--text-title-1-weight) var(--text-title-1-size)/var(--text-title-1-line) var(--font-sans); letter-spacing: var(--text-title-1-spacing); }
+.t-title-2   { font: var(--text-title-2-weight) var(--text-title-2-size)/var(--text-title-2-line) var(--font-sans); letter-spacing: var(--text-title-2-spacing); }
+.t-heading-1 { font: var(--text-heading-1-weight) var(--text-heading-1-size)/var(--text-heading-1-line) var(--font-sans); letter-spacing: var(--text-heading-1-spacing); }
+.t-heading-2 { font: var(--text-heading-2-weight) var(--text-heading-2-size)/var(--text-heading-2-line) var(--font-sans); letter-spacing: var(--text-heading-2-spacing); }
+.t-headline-1{ font: var(--text-headline-1-weight) var(--text-headline-1-size)/var(--text-headline-1-line) var(--font-sans); letter-spacing: var(--text-headline-1-spacing); }
+.t-headline-2{ font: var(--text-headline-2-weight) var(--text-headline-2-size)/var(--text-headline-2-line) var(--font-sans); letter-spacing: var(--text-headline-2-spacing); }
+.t-body-1    { font: var(--text-body-1-weight) var(--text-body-1-size)/var(--text-body-1-line) var(--font-sans); letter-spacing: var(--text-body-1-spacing); }
+.t-body-1r   { font: var(--text-body-1r-weight) var(--text-body-1r-size)/var(--text-body-1r-line) var(--font-sans); letter-spacing: var(--text-body-1r-spacing); }
+.t-body-2    { font: var(--text-body-2-weight) var(--text-body-2-size)/var(--text-body-2-line) var(--font-sans); letter-spacing: var(--text-body-2-spacing); }
+.t-label-1   { font: var(--text-label-1-weight) var(--text-label-1-size)/var(--text-label-1-line) var(--font-sans); letter-spacing: var(--text-label-1-spacing); }
+.t-label-2   { font: var(--text-label-2-weight) var(--text-label-2-size)/var(--text-label-2-line) var(--font-sans); letter-spacing: var(--text-label-2-spacing); }
+.t-caption-1 { font: var(--text-caption-1-weight) var(--text-caption-1-size)/var(--text-caption-1-line) var(--font-sans); letter-spacing: var(--text-caption-1-spacing); }
+.t-caption-2 { font: var(--text-caption-2-weight) var(--text-caption-2-size)/var(--text-caption-2-line) var(--font-sans); letter-spacing: var(--text-caption-2-spacing); }
+
+/* Semantic tag mappings — sensible defaults for prose */
+h1 { font: var(--text-display-2-weight) var(--text-display-2-size)/var(--text-display-2-line) var(--font-sans); letter-spacing: var(--text-display-2-spacing); }
+h2 { font: var(--text-title-1-weight) var(--text-title-1-size)/var(--text-title-1-line) var(--font-sans); letter-spacing: var(--text-title-1-spacing); }
+h3 { font: var(--text-title-2-weight) var(--text-title-2-size)/var(--text-title-2-line) var(--font-sans); letter-spacing: var(--text-title-2-spacing); }
+h4 { font: var(--text-heading-2-weight) var(--text-heading-2-size)/var(--text-heading-2-line) var(--font-sans); letter-spacing: var(--text-heading-2-spacing); }
+p, li, span { letter-spacing: 0.006em; }
+code, pre, kbd { font-family: var(--font-mono); }
