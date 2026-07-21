@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+  <link rel="stylesheet" href="_ds/wanted-design-system-019e012c-ddde-7919-8039-b806627a851a/colors_and_type.css">
+  <script src="_ds/wanted-design-system-019e012c-ddde-7919-8039-b806627a851a/_ds_bundle.js"></script>
+  <style>
+    body { margin:0; background:#ffffff; color:#171719; -webkit-font-smoothing:antialiased; }
+    * { box-sizing:border-box; }
+    a { color:#0066FF; text-decoration:none; }
+    a:hover { color:#0052cc; }
+    @keyframes bgDriftA { 0% { transform:translate3d(0,0,0) scale(1.08); } 50% { transform:translate3d(-1.4%,-1.6%,0) scale(1.12); } 100% { transform:translate3d(0,0,0) scale(1.08); } }
+    @keyframes bgDriftB { 0% { transform:translate3d(0,0,0) scale(1.14); } 50% { transform:translate3d(1.8%,1.2%,0) scale(1.18); } 100% { transform:translate3d(0,0,0) scale(1.14); } }
+    .bg-wrap { position:fixed; inset:0; z-index:0; overflow:hidden; pointer-events:none; }
+    .bg-wrap .bg-img { position:absolute; inset:-6%; background:url('uploads/bg-bluegray.png') center/cover no-repeat; }
+    .bg-wrap .bg-a { opacity:0.55; animation:bgDriftA 26s ease-in-out infinite; }
+    .bg-wrap .bg-b { opacity:0.28; filter:blur(3px); animation:bgDriftB 34s ease-in-out infinite; mix-blend-mode:multiply; }
+    .bg-wrap .bg-veil { position:absolute; inset:0; background:radial-gradient(120% 90% at 50% 45%, rgba(255,255,255,0.72) 0%, rgba(255,255,255,0.5) 45%, rgba(255,255,255,0.34) 100%); }
+    @media (prefers-reduced-motion: reduce) { .bg-wrap .bg-a, .bg-wrap .bg-b { animation:none; } }
+    @keyframes lbfade { from { opacity:0; } to { opacity:1; } }
+    @keyframes lbrise { from { opacity:0; transform:translateY(10px); } to { opacity:1; transform:translateY(0); } }
+    .thumb:hover .thumb-img { transform:scale(1.035); }
+    .thumb:hover { border-color:rgba(112,115,124,0.42); box-shadow:0 12px 30px -12px rgba(0,0,0,0.18); }
+    .thumb:hover .thumb-open { opacity:1; }
+    .navbtn:hover { background:#171719; color:#fff; border-color:#171719; }
+    .cardnum { font-variant-numeric:tabular-nums; }
+  </style>
+</helmet>
+<div class="bg-wrap" aria-hidden="true">
+  <div class="bg-img bg-a"></div>
+  <div class="bg-img bg-b"></div>
+  <div class="bg-veil"></div>
+</div>
+<div style="position:relative; z-index:1; max-width:1360px; margin:0 auto; padding:0 40px;">
+
+  <header style="display:flex; align-items:center; justify-content:space-between; padding:26px 0; border-bottom:1px solid rgba(112,115,124,0.16);">
+    <div style="display:flex; align-items:center; gap:14px;">
+      <div style="width:34px; height:34px; border-radius:9px; background:#171719; color:#fff; display:flex; align-items:center; justify-content:center; font:800 15px/1 var(--font-display); letter-spacing:-0.02em;">H</div>
+      <div style="display:flex; flex-direction:column; gap:1px;">
+        <span style="font:700 14px/1.2 var(--font-sans); letter-spacing:-0.01em;">Hero · 도매사 포털</span>
+        <span style="font:500 11px/1.2 var(--font-mono); letter-spacing:0.04em; color:rgba(55,56,60,0.5);">HITEJINRO × BIZDATA</span>
+      </div>
+    </div>
+    <div style="display:flex; align-items:center; gap:8px; font:500 11.5px/1 var(--font-mono); letter-spacing:0.03em; color:rgba(55,56,60,0.55);">
+      <span>{{ conceptCount }} CONCEPTS</span>
+      <span style="opacity:0.4;">/</span>
+      <span>{{ totalScreens }} SCREENS</span>
+    </div>
+  </header>
+
+  <section style="padding:72px 0 56px;">
+    <span style="font:600 12px/1 var(--font-mono); letter-spacing:0.14em; color:#0066FF;">DESIGN REVIEW</span>
+    <h1 style="margin: 20px 0 0; font: 700 clamp(38px,5.2vw,64px)/1.04 var(--font-display); letter-spacing: -0.03em; max-width: 16.9ch; font-size: 64px">디자인 시안 갤러리</h1>
+    <p style="margin: 22px 0 0; max-width: 75.5ch; font: 400 17px/1.6 var(--font-sans); color: rgba(55,56,60,0.72)">하이트진로 도매사 포털 &lt;Hero&gt;의 UI 시안을 컨셉별로 정리했습니다. 썸네일을 클릭하면 원본 해상도로 확대되며, 좌우 화살표 또는 키보드 방향키로 화면을 넘길 수 있습니다.</p>
+  </section>
+
+  <nav style="position:sticky; top:0; z-index:20; background:rgba(255,255,255,0.86); backdrop-filter:blur(10px); -webkit-backdrop-filter:blur(10px); border-bottom:1px solid rgba(112,115,124,0.16); margin:0 -40px; padding:0 40px;">
+    <div style="display:flex; gap:4px; overflow-x:auto;">
+      <sc-for list="{{ tabs }}" as="tab" hint-placeholder-count="5">
+        <button onClick="{{ tab.onClick }}" style="{{ tab.style }}">
+          <span style="font:700 15px/1 var(--font-sans); letter-spacing:-0.01em;">{{ tab.name }}</span>
+          <span class="cardnum" style="font:600 11px/1 var(--font-mono); padding:3px 6px; border-radius:20px; background:{{ tab.badgeBg }}; color:{{ tab.badgeFg }};">{{ tab.count }}</span>
+        </button>
+      </sc-for>
+    </div>
+  </nav>
+
+  <section style="padding:44px 0 12px;">
+    <div style="display:flex; align-items:baseline; gap:14px; flex-wrap:wrap;">
+      <h2 style="margin:0; font:700 30px/1.1 var(--font-display); letter-spacing:-0.025em;">{{ active.name }}</h2>
+      <span class="cardnum" style="font:500 13px/1 var(--font-mono); color:rgba(55,56,60,0.45);">{{ active.countLabel }}</span>
+    </div>
+    <p style="margin:12px 0 0; max-width:60ch; font:400 15px/1.6 var(--font-sans); color:rgba(55,56,60,0.66);">{{ active.desc }}</p>
+  </section>
+
+  <section style="padding:20px 0 8px;">
+    <div style="display:grid; grid-template-columns:repeat(auto-fill,minmax(320px,1fr)); gap:26px;">
+      <sc-for list="{{ mainCards }}" as="c" hint-placeholder-count="4">
+        <figure class="thumb" onClick="{{ c.onClick }}" style="margin:0; cursor:zoom-in; border:1px solid rgba(112,115,124,0.22); border-radius:16px; overflow:hidden; background:#fff; transition:box-shadow .25s cubic-bezier(.4,0,.2,1), border-color .25s;">
+          <div style="position:relative; height:232px; overflow:hidden; background:#f4f5f6; border-bottom:1px solid rgba(112,115,124,0.14);">
+            <img class="thumb-img" src="{{ c.src }}" alt="{{ c.title }}" loading="lazy" style="width:100%; height:100%; object-fit:cover; object-position:top center; display:block; transition:transform .5s cubic-bezier(.2,0,.2,1);">
+            <span class="thumb-open" style="position:absolute; top:12px; right:12px; opacity:0; transition:opacity .2s; font:600 11px/1 var(--font-mono); letter-spacing:0.03em; color:#fff; background:rgba(23,23,25,0.72); padding:6px 9px; border-radius:8px; backdrop-filter:blur(4px);">확대 ↗</span>
+          </div>
+          <figcaption style="display:flex; align-items:center; justify-content:space-between; gap:12px; padding:15px 18px;">
+            <div style="display:flex; flex-direction:column; gap:3px; min-width:0;">
+              <span style="font:600 15px/1.3 var(--font-sans); letter-spacing:-0.01em; overflow:hidden; text-overflow:ellipsis; white-space:nowrap;">{{ c.title }}</span>
+              <span style="font:500 12px/1.2 var(--font-sans); color:rgba(55,56,60,0.5);">{{ c.tag }}</span>
+            </div>
+            <span class="cardnum" style="flex:none; font:600 12px/1 var(--font-mono); color:rgba(55,56,60,0.4);">{{ c.numLabel }}</span>
+          </figcaption>
+        </figure>
+      </sc-for>
+    </div>
+  </section>
+
+  <sc-if value="{{ hasExtra }}" hint-placeholder-val="{{ false }}">
+    <section style="padding:40px 0 8px;">
+      <div style="display:flex; align-items:center; gap:14px; margin-bottom:22px;">
+        <span style="font:700 12px/1 var(--font-mono); letter-spacing:0.12em; color:rgba(55,56,60,0.55); flex:none;">번외 시안</span>
+        <span style="height:1px; flex:1; background:rgba(112,115,124,0.2);"></span>
+      </div>
+      <div style="display:grid; grid-template-columns:repeat(auto-fill,minmax(320px,1fr)); gap:26px;">
+        <sc-for list="{{ extraCards }}" as="c" hint-placeholder-count="1">
+          <figure class="thumb" onClick="{{ c.onClick }}" style="margin:0; cursor:zoom-in; border:1px solid rgba(112,115,124,0.22); border-radius:16px; overflow:hidden; background:#fff; transition:box-shadow .25s cubic-bezier(.4,0,.2,1), border-color .25s;">
+            <div style="position:relative; height:232px; overflow:hidden; background:#f4f5f6; border-bottom:1px solid rgba(112,115,124,0.14);">
+              <img class="thumb-img" src="{{ c.src }}" alt="{{ c.title }}" loading="lazy" style="width:100%; height:100%; object-fit:cover; object-position:top center; display:block; transition:transform .5s cubic-bezier(.2,0,.2,1);">
+              <span class="thumb-open" style="position:absolute; top:12px; right:12px; opacity:0; transition:opacity .2s; font:600 11px/1 var(--font-mono); letter-spacing:0.03em; color:#fff; background:rgba(23,23,25,0.72); padding:6px 9px; border-radius:8px;">확대 ↗</span>
+            </div>
+            <figcaption style="display:flex; align-items:center; justify-content:space-between; gap:12px; padding:15px 18px;">
+              <div style="display:flex; flex-direction:column; gap:3px; min-width:0;">
+                <span style="font:600 15px/1.3 var(--font-sans); letter-spacing:-0.01em; overflow:hidden; text-overflow:ellipsis; white-space:nowrap;">{{ c.title }}</span>
+                <span style="font:500 12px/1.2 var(--font-sans); color:rgba(55,56,60,0.5);">{{ c.tag }}</span>
+              </div>
+              <span class="cardnum" style="flex:none; font:600 12px/1 var(--font-mono); color:rgba(55,56,60,0.4);">{{ c.numLabel }}</span>
+            </figcaption>
+          </figure>
+        </sc-for>
+      </div>
+    </section>
+  </sc-if>
+
+  <footer style="margin-top:88px; padding:34px 0; border-top:1px solid rgba(112,115,124,0.16); display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:12px;">
+    <span style="font:500 12px/1.4 var(--font-mono); letter-spacing:0.03em; color:rgba(55,56,60,0.45);">HERO PORTAL · UI DESIGN CONCEPTS</span>
+    <span style="font:500 12px/1.4 var(--font-sans); color:rgba(55,56,60,0.45);">HITEJINRO × BIZDATA</span>
+  </footer>
+</div>
+
+<sc-if value="{{ lb.open }}" hint-placeholder-val="{{ false }}">
+  <div onClick="{{ lb.onBackdrop }}" style="position:fixed; inset:0; z-index:100; background:rgba(248,249,250,0.94); backdrop-filter:blur(6px); -webkit-backdrop-filter:blur(6px); display:flex; flex-direction:column; animation:lbfade .18s ease-out;">
+    <div style="flex:none; display:flex; align-items:center; justify-content:space-between; gap:16px; padding:20px 28px; border-bottom:1px solid rgba(112,115,124,0.16);">
+      <div style="display:flex; flex-direction:column; gap:2px; min-width:0;">
+        <span style="font:700 16px/1.3 var(--font-sans); letter-spacing:-0.01em; overflow:hidden; text-overflow:ellipsis; white-space:nowrap;">{{ lb.title }}</span>
+        <span style="font:500 12px/1.2 var(--font-mono); letter-spacing:0.03em; color:rgba(55,56,60,0.55);">{{ lb.meta }}</span>
+      </div>
+      <div style="display:flex; align-items:center; gap:16px; flex:none;">
+        <span class="cardnum" style="font:600 14px/1 var(--font-mono); letter-spacing:0.04em; color:rgba(55,56,60,0.7);">{{ lb.counter }}</span>
+        <button class="navbtn" onClick="{{ lb.onClose }}" aria-label="닫기" style="width:40px; height:40px; border-radius:10px; border:1px solid rgba(112,115,124,0.28); background:#fff; color:#171719; font-size:20px; line-height:1; cursor:pointer; transition:all .18s; display:flex; align-items:center; justify-content:center;">✕</button>
+      </div>
+    </div>
+
+    <div style="flex:1; position:relative; display:flex; align-items:center; justify-content:center; padding:28px 84px; min-height:0;">
+      <button class="navbtn" onClick="{{ lb.onPrev }}" aria-label="이전" style="position:absolute; left:24px; top:50%; transform:translateY(-50%); width:52px; height:52px; border-radius:50%; border:1px solid rgba(112,115,124,0.28); background:#fff; color:#171719; font-size:22px; cursor:pointer; transition:all .18s; display:flex; align-items:center; justify-content:center; box-shadow:0 4px 14px -6px rgba(0,0,0,0.2);">‹</button>
+      <img src="{{ lb.src }}" alt="{{ lb.title }}" style="max-width:100%; max-height:100%; object-fit:contain; border-radius:12px; border:1px solid rgba(112,115,124,0.2); background:#fff; box-shadow:0 24px 60px -24px rgba(0,0,0,0.35); animation:lbrise .22s cubic-bezier(.2,0,.2,1);">
+      <button class="navbtn" onClick="{{ lb.onNext }}" aria-label="다음" style="position:absolute; right:24px; top:50%; transform:translateY(-50%); width:52px; height:52px; border-radius:50%; border:1px solid rgba(112,115,124,0.28); background:#fff; color:#171719; font-size:22px; cursor:pointer; transition:all .18s; display:flex; align-items:center; justify-content:center; box-shadow:0 4px 14px -6px rgba(0,0,0,0.2);">›</button>
+    </div>
+
+    <div style="flex:none; display:flex; gap:10px; justify-content:center; padding:16px 28px 24px; overflow-x:auto;">
+      <sc-for list="{{ lb.thumbs }}" as="t" hint-placeholder-count="4">
+        <button onClick="{{ t.onClick }}" aria-label="{{ t.title }}" style="{{ t.style }}">
+          <img src="{{ t.src }}" alt="" style="width:100%; height:100%; object-fit:cover; object-position:top center; display:block;">
+        </button>
+      </sc-for>
+    </div>
+  </div>
+</sc-if>
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+class Component extends DCLogic {
+  // ── EDIT HERE ── 이미지 파일만 교체/추가하면 갤러리가 자동 구성됩니다.
+  // 각 화면: [파일명(uploads/HJ Portal 기준), 제목, 태그]
+  static DIR = "uploads/";
+  static DATA = [
+    { id:"A", name:"Concept A", desc:"조회조건·그리드, 폼 등록, 대시보드를 아우르는 대표 시안입니다. 반응형 대응안을 번외로 함께 제안합니다.",
+      main:[
+        ["A_01.png", "조회조건 & 그리드 ①", "목록 / 검색"],
+        ["A_02.png", "폼 등록", "입력 / 등록"],
+        ["A_03.png", "대시보드 ①", "요약 / 현황"],
+        ["A_04.png", "대시보드 ②", "요약 / 현황"],
+        ["A_05.png", "표준 품목 수동 매핑", "목록 / 매핑"],
+      ],
+      extra:[
+        ["A_06.png", "조회조건 & 그리드 — 반응형", "모바일 대응"],
+      ] },
+    { id:"B", name:"Concept B", desc:"컴팩트한 정보 밀도와 명료한 위계를 강조한 대안 시안입니다.",
+      main:[
+        ["B_01.png", "조회조건 & 그리드", "목록 / 검색"],
+        ["B_02.png", "폼 등록", "입력 / 등록"],
+        ["B_03.png", "대시보드 ①", "요약 / 현황"],
+        ["B_04.png", "대시보드 ②", "요약 / 현황"],
+      ] },
+    { id:"A+B", name:"Concept A + B", desc:"A안과 B안의 장점을 결합한 절충 시안입니다.",
+      main:[
+        ["A+B_01.png", "조회조건 & 그리드", "목록 / 검색"],
+        ["A+B_02.png", "폼 등록", "입력 / 등록"],
+        ["A+B_03.png", "대시보드 ①", "요약 / 현황"],
+        ["A+B_04.png", "대시보드 ②", "요약 / 현황"],
+      ] },
+    { id:"C", name:"Concept C", desc:"핵심 화면 중심의 간결한 방향성 시안입니다.",
+      main:[
+        ["C_01.png", "조회조건 & 그리드", "목록 / 검색"],
+        ["C_02.png", "대시보드", "요약 / 현황"],
+      ] },
+    { id:"D", name:"Concept D", desc:"단일 화면으로 제안하는 미니멀 방향성 시안입니다.",
+      main:[
+        ["D_01.png", "표준 품목 수동 매핑", "목록 / 매핑"],
+      ] },
+  ];
+
+  state = { tab: 0, lbOpen: false, lbIndex: 0 };
+
+  src(file) { return encodeURI(Component.DIR + file); }
+  pad(n) { return String(n).padStart(2, "0"); }
+
+  // 현재 탭의 전체 이미지(대표 + 번외) — 라이트박스 이동 순서
+  flat() {
+    const c = Component.DATA[this.state.tab];
+    const list = (c.main || []).concat(c.extra || []);
+    return list.map(([file, title, tag], i) => ({ file, title, tag, i, concept: c.name, isExtra: i >= (c.main || []).length }));
+  }
+
+  open(i) { this.setState({ lbOpen: true, lbIndex: i }); }
+  close() { this.setState({ lbOpen: false }); }
+  step(d) {
+    const n = this.flat().length;
+    this.setState(s => ({ lbIndex: (s.lbIndex + d + n) % n }));
+  }
+
+  componentDidMount() {
+    this._key = (e) => {
+      if (!this.state.lbOpen) return;
+      if (e.key === "ArrowLeft") { e.preventDefault(); this.step(-1); }
+      else if (e.key === "ArrowRight") { e.preventDefault(); this.step(1); }
+      else if (e.key === "Escape") { this.close(); }
+    };
+    window.addEventListener("keydown", this._key);
+  }
+  componentWillUnmount() { window.removeEventListener("keydown", this._key); }
+
+  card(item) {
+    return {
+      src: this.src(item.file),
+      title: item.title,
+      tag: item.tag,
+      numLabel: this.pad(item.i + 1),
+      onClick: () => this.open(item.i),
+    };
+  }
+
+  renderVals() {
+    const DATA = Component.DATA;
+    const c = DATA[this.state.tab];
+    const flat = this.flat();
+    const total = flat.length;
+    const mainCount = (c.main || []).length;
+
+    const tabs = DATA.map((t, i) => {
+      const on = i === this.state.tab;
+      const count = (t.main || []).length + (t.extra || []).length;
+      return {
+        name: t.name, count,
+        onClick: () => this.setState({ tab: i, lbOpen: false }),
+        style: `display:flex; align-items:center; gap:9px; padding:15px 4px; margin-right:24px; background:none; border:none; border-bottom:2px solid ${on ? "#171719" : "transparent"}; color:${on ? "#171719" : "rgba(55,56,60,0.5)"}; cursor:pointer; white-space:nowrap; transition:color .18s, border-color .18s;`,
+        badgeBg: on ? "#171719" : "rgba(112,115,124,0.12)",
+        badgeFg: on ? "#ffffff" : "rgba(55,56,60,0.6)",
+      };
+    });
+
+    const mainCards = (c.main || []).map((_, k) => this.card(flat[k]));
+    const extraCards = (c.extra || []).map((_, k) => this.card(flat[mainCount + k]));
+
+    const cur = flat[this.state.lbIndex] || flat[0] || {};
+    const lb = {
+      open: this.state.lbOpen,
+      src: this.src(cur.file || ""),
+      title: cur.title || "",
+      meta: `${c.name}${cur.isExtra ? " · 번외" : ""}  ·  ${cur.tag || ""}`,
+      counter: `${this.pad(this.state.lbIndex + 1)} / ${this.pad(total)}`,
+      onClose: () => this.close(),
+      onPrev: (e) => { e.stopPropagation(); this.step(-1); },
+      onNext: (e) => { e.stopPropagation(); this.step(1); },
+      onBackdrop: () => this.close(),
+      thumbs: flat.map(item => {
+        const on = item.i === this.state.lbIndex;
+        return {
+          src: this.src(item.file),
+          title: item.title,
+          onClick: (e) => { e.stopPropagation(); this.setState({ lbIndex: item.i }); },
+          style: `flex:none; width:88px; height:56px; padding:0; overflow:hidden; border-radius:8px; cursor:pointer; background:#fff; border:2px solid ${on ? "#171719" : "rgba(112,115,124,0.24)"}; opacity:${on ? "1" : "0.55"}; transition:opacity .18s, border-color .18s;`,
+        };
+      }),
+    };
+
+    return {
+      conceptCount: DATA.length,
+      totalScreens: DATA.reduce((a, t) => a + (t.main || []).length + (t.extra || []).length, 0),
+      tabs,
+      active: { name: c.name, desc: c.desc, countLabel: `${total}개 화면` },
+      mainCards,
+      extraCards,
+      hasExtra: extraCards.length > 0,
+      lb,
+    };
+  }
+}
+</script>
+</body>
+</html>
